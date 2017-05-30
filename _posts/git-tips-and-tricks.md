@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Git tips and tricks"
+date:   2014-02-13 10:45:01 -0600
+categories: git
+---
+
 ## How do I change the author of my commits?
 
 Whilst I was going through the log of my Git commits, I had noticed some inconsistencies with the author value of some commits. They were all from me, but with different values, so I decided to try and fix that by setting the author and the email values to universal values. To do so, I used the following command:

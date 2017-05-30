@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Lazy loading images with JavaScript"
+date:   2013-11-23 18:56:01 -0600
+categories: javascript web
+---
+
 During the rebuild of my [Videouri](http://videouri.com) project, I was constantly looking for the best approach of writing and serving all the modules involved, and onto that matter, I decided to do a bit of investigation into implementing a lazy load for the images. First thing that came into my head was to server the images, upon DOM ready with the help of jQuery:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="js">$(function(){
