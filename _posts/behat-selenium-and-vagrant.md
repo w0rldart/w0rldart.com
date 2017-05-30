@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Behat, Selenium and Vagrant"
+date:   2016-02-16 20:47:01 -0600
+categories: bdd tests
+---
+
 **Don't run Selenium server in your Vagrant box,** run it in your host. On one of my laptops I have a [Vagrant](https://www.vagrantup.com/) box which is a replica of a live [CentOS](https://www.centos.org/) web server (provisioned via [Ansible](https://www.ansible.com/)), and there is where all my code resides and naturally where I run my tests from also, whilst my host is completely clean (14.04 Ubuntu and SublimeText as IDE). Just before getting to the steps, I don't know whether you read already or not the [Behat And Selenium in Vagrant](http://programmingarehard.com/2014/03/17/behat-and-selenium-in-vagrant.html/) article, but it depicts how to run the tests inside Vagrant, by having to install **firefox**, **xvfb** and **headless jre** in your Vagrant box. Well, I don't think it's the right way to do it. ****Leave your box intact**** And the reason is that, unless you run in a complete CLI environment, most certainly is that your host has almost everything you need to run Selenium there (maybe missing JRE). Right. In order to run my [Behat/Mink](http://mink.behat.org/en/latest/) Selenium tests and see the results in my host browser for a [Phalcon PHP](https://phalconphp.com/en/) project, this is what I ended up doing 1\. Download Selenium on my host machine from [their official page](http://www.seleniumhq.org/download/) 2\. Adjust my project's **behat.yml** parameters for Selenium to call to my host:
 
 <pre class="EnlighterJSRAW" data-enlighter-language="null">selenium2:

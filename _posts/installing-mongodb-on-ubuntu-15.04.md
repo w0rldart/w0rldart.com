@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Installing MongoDB on Ubuntu 15.04"
+date:   2016-01-13 19:23:01 -0600
+categories: ubuntu mongodb linux
+---
+
 A few weeks ago, I had updated Ubuntu on a laptop of mine, to 15.10\. When I tried to install and configure [MongoDB](http://mongodb.com), I had completely overseen the fact that with the upgrade from Ubuntu 14.04 (Trusty) to 15.04 (Vivid),  [Upstart](http://upstart.ubuntu.com/) had been replaced with [systemd](http://freedesktop.org/wiki/Software/systemd/). That has caused me a few brainscratches of why mongo is not working as a service. Have a look through the [Ubuntu (Vivid) 15.04 release notes](https://wiki.ubuntu.com/VividVervet/ReleaseNotes)  
 
 # The issue

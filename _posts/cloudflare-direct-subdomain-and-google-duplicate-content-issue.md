@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Using a 'direct' subdomain at CloudFlare and avoiding Google duplicate content penalties"
+date:   2014-10-09 13:30:01 -0600
+categories: web dns cdn google
+---
+
 Don't know how many of you had realized this problem so far, but having a **direct** sub domain at Cloudflare, for example: **direct.domain.com**, which has the purpose to serve a live non-cached of the site, can create some duplicate content issues at google, and that's never good. Well, the best and easiest solution that I found, was to redirect `robots.txt` to a `robots.php` **Apache Rewrite rule**
 
 <pre class="EnlighterJSRAW" data-enlighter-language="null"># Server robots.txt from the script, to fix the possible duplicate content on google,

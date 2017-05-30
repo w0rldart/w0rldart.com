@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Marketing vanity URLs"
+date:   2015-06-19 11:57:01 -0600
+categories: marketing web
+---
+
 Vanity urls are simple but incredibly efficient redirects to help the marketing teams track their  campaigns via Google Analytics, in this case, and help build reports or track their effectiveness. This is a small walk-through on:
 
 *   How to track traffic to websites from printed leaflets and posters
