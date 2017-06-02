@@ -1,0 +1,43 @@
+/**
+ * Header
+ */
+h1.title {
+    font-size:  2.9rem;
+}
+
+ul#skills {
+    list-style: none;
+}
+
+ul#skills li.skill {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+ul#skills li.skill h4 {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 0;
+    padding: 10px;
+}
+
+ul#skills li.skill h4 a {
+    color: #222;
+    text-decoration: none;
+
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    -o-transition: color 0.3s;
+    transition: color 0.3s;
+}
+
+ul#skills li.skill h4 a:hover {
+    color: #0FA0CE;
+    text-decoration: none;
+
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    -o-transition: color 0.3s;
+    transition: color 0.3s;
+}
