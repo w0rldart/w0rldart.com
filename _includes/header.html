@@ -1,3 +1,19 @@
-<header>
-    <h1>header</h1>
-</header>
+<div class="container">
+    <section class="header">
+        <hr>
+        <h1 class="title">Alex Budurovici - DevOps specialist and Software Engineer</h2>
+        <hr>
+
+        <ul id="skills" class="u-text-center">
+            {% for skill in site.data.skills %}
+                <li class="skill">
+                    <h4>
+                        <a href="" target="_blank">
+                            {{ skill.name }}
+                        </a>
+                    </h4>
+                </li>
+            {% endfor %}
+        </div>
+    </section>
+</div>
