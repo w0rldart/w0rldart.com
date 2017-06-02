@@ -1,0 +1,13 @@
+[
+    { "name": "Terraform", "link": "https://www.terraform.io/" },
+    { "name": "Ansible", "link": "https://www.ansible.com/" },
+    { "name": "AWS", "link": "https://aws.amazon.com/" },
+    { "name": "Jenkins", "link": "https://jenkins.io/" },
+    { "name": "NodeJS", "link": "https://nodejs.org/en/" },
+    { "name": "MongoDB", "link": "https://www.mongodb.com/" },
+    { "name": "PHP", "link": "https://secure.php.net/" },
+    { "name": "MySQL", "link": "https://www.mysql.com/" },
+    { "name": "DigitalOcean", "link": "https://www.digitalocean.com/" },
+    { "name": "Python", "link": "https://www.python.org/" },
+    { "name": "Packer", "link": "https://www.packer.io/" }
+]
