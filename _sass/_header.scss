@@ -1,0 +1,36 @@
+header.navbar {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    cursor: default;
+
+    h1.logo {
+        flex: 0 0 auto;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    ul.navbar-list {
+        flex: 0 0 auto;
+        margin: 0;
+        text-align: left;
+        display: flex;
+
+        li.navbar-item {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            a {
+                padding: 0 0.8rem;
+                text-rendering: optimizeLegibility;
+                text-rendering: geometricPrecision;
+            }
+        }
+    }
+}
