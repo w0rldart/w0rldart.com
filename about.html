@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<div class="container">
+    <ul id="skills" class="u-text-center">
+        {% for skill in site.data.skills %}
+            <li class="skill">
+                <h4>
+                    <a href="" target="_blank">
+                        {{ skill.name }}
+                    </a>
+                </h4>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
