@@ -1,0 +1,31 @@
+body {
+    background: #fff;
+    color: #222;
+    font-family: Courier, monospace;
+    font-size: 16px;
+    line-height: 1.5;
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    
+    font-smoothing: subpixel-antialiased;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    
+    text-rendering: optimizeLegibility;
+    text-rendering: geometricPrecision;
+
+    -moz-font-feature-settings: "kern" 1, "liga" 1;
+    -ms-font-feature-settings: "kern" 1, "liga" 1;
+    -o-font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-feature-settings: "kern" 1, "liga" 1;
+    font-feature-settings: "kern" 1, "liga" 1;
+}
+
+a {
+    text-decoration: none;
+}
