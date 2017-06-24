@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Installing MongoDB on Ubuntu 15.04"
-date:   2016-01-13 19:23:01 -0600
+title: "Installing MongoDB on Ubuntu 15.04"
+date: 2016-01-13 19:23:01 -0600
 categories: ubuntu mongodb linux
 ---
 
@@ -13,15 +13,19 @@ Few things that you'll notice when you're installing MongoDB ([Install steps](h
 
 *   Whilst installing, you're see first clue of things going wrong when message shows:
 
-<pre class="EnlighterJSRAW" data-enlighter-language="null">invoke-rc.d: mongod.service doesn't exist but the upstart job does. Nothing to start or stop until a systemd or init job is present.</pre>
+{% highlight text %}
+invoke-rc.d: mongod.service doesn't exist but the upstart job does. Nothing to start or stop until a systemd or init job is present.
+{% endhighlight %}
 
 *   Executing service to see it's status, will just confirm the above `service mongod status` outputs
 
-<pre class="EnlighterJSRAW" data-enlighter-language="null">● mongod.service
+{% highlight text %}
+● mongod.service
 Loaded: not-found (Reason: No such file or directory)
 Active: failed (Result: exit-code) since Tue 2016-01-12 17:37:43 GMT; 6min ago
 
-.....</pre>
+.....
+{% endhighlight %}
 
 *   there is no **init.d** file for **mongod**
 
@@ -29,18 +33,22 @@ Active: failed (Result: exit-code) since Tue 2016-01-12 17:37:43 GMT; 6min ago
 
 First thing I tried, was to look for an **init.d** script on [mongo's official github repository](https://github.com/mongodb/mongo/), and I had found it here: [https://github.com/mongodb/mongo/blob/master/debian/init.d](https://github.com/mongodb/mongo/blob/master/debian/init.d). After downloading it and setting it with execution permissions, executing wouldn't bring any joy.
 
-<pre class="EnlighterJSRAW" data-enlighter-language="null">cd /etc/init.d
+{% highlight bash %}
+cd /etc/init.d
 
 wget https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d -O mongod
 
 chmod +x mongod
 
-./mongod start</pre>
+./mongod start
+{% endhighlight %}
 
 <span style="line-height: 1.75em;">resulting in</span>
 
-<pre class="EnlighterJSRAW" data-enlighter-language="null">[....] Starting mongod (via systemctl): mongod.serviceFailed to start mongod.service: Unit mongod.service failed to load: No such file or directory.
-failed!</pre>
+{% highlight text %}
+[....] Starting mongod (via systemctl): mongod.serviceFailed to start mongod.service: Unit mongod.service failed to load: No such file or directory.
+failed!
+{% endhighlight %}
 
 # The actual solution
 
