@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "CSV UTF-8 encoding issues in Excel"
-date:   2015-10-09 16:31:01 -0600
+title: "CSV UTF-8 encoding issues in Excel"
+date: 2015-10-09 16:31:01 -0600
 categories: encoding hacks
 ---
 
