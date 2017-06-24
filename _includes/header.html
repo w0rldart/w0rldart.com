@@ -1,19 +1,15 @@
-<div class="container">
-    <section class="header">
-        <hr>
-        <h1 class="title">Alex Budurovici - DevOps specialist and Software Engineer</h2>
-        <hr>
+<header class="navbar">
+    <h1 class="logo">
+        <a href="/" title="Alex Budurovici - DevOps Specialist">
+            <!-- <img src=""> -->
+            Alex
+        </a>
+    </h1>
 
-        <ul id="skills" class="u-text-center">
-            {% for skill in site.data.skills %}
-                <li class="skill">
-                    <h4>
-                        <a href="" target="_blank">
-                            {{ skill.name }}
-                        </a>
-                    </h4>
-                </li>
-            {% endfor %}
-        </div>
-    </section>
-</div>
+    <ul class="navbar-list">
+        <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/about">About me</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/services">Services</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/projects">Projects</a></li>
+    </ul>
+</header>
