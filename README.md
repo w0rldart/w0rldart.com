@@ -1,6 +1,7 @@
 # Resources
  - Skeleton Framework: https://skeleton-framework.github.io/
  - Supported highlighters: https://haisum.github.io/2014/11/07/jekyll-pygments-supported-highlighters/
+ - Inspiration: https://rsms.me/wasm-intro
 
 # Notes
 For testing this locally, you need to
