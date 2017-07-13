@@ -5,35 +5,28 @@ date: 2016-01-13 19:23:01 -0600
 categories: ubuntu mongodb linux
 ---
 
-A few weeks ago, I had updated Ubuntu on a laptop of mine, to 15.10\. When I tried to install and configure [MongoDB](http://mongodb.com), I had completely overseen the fact that with the upgrade from Ubuntu 14.04 (Trusty) to 15.04 (Vivid),  [Upstart](http://upstart.ubuntu.com/) had been replaced with [systemd](http://freedesktop.org/wiki/Software/systemd/). That has caused me a few brainscratches of why mongo is not working as a service. Have a look through the [Ubuntu (Vivid) 15.04 release notes](https://wiki.ubuntu.com/VividVervet/ReleaseNotes)  
+Starting with ubuntu 15.04, [Upstart](http://upstart.ubuntu.com/) has been replaced with [systemd](http://freedesktop.org/wiki/Software/systemd/), and whilst installing [MongoDB](http://mongodb.com) was no issue, there was no way of having it running as a service by default.
 
-# The issue
-
-Few things that you'll notice when you're installing MongoDB ([Install steps](https://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/#import-the-public-key-used-by-the-package-management-system)), are:
-
-*   Whilst installing, you're see first clue of things going wrong when message shows:
-
-{% highlight text %}
+First clue comes when installing MongoDB ([Install steps](https://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/#import-the-public-key-used-by-the-package-management-system)) with the following message:
+```
 invoke-rc.d: mongod.service doesn't exist but the upstart job does. Nothing to start or stop until a systemd or init job is present.
-{% endhighlight %}
+```
 
-*   Executing service to see it's status, will just confirm the above `service mongod status` outputs
-
-{% highlight text %}
+And indeed `service mongod status` confirms that the service is not running
+```shell
 ● mongod.service
 Loaded: not-found (Reason: No such file or directory)
 Active: failed (Result: exit-code) since Tue 2016-01-12 17:37:43 GMT; 6min ago
-
 .....
-{% endhighlight %}
+```
 
-*   there is no **init.d** file for **mongod**
+and also, there is no **init.d** file for **mongod**
 
-# Tried this, doesn't work
+## Tried this, doesn't work
 
-First thing I tried, was to look for an **init.d** script on [mongo's official github repository](https://github.com/mongodb/mongo/), and I had found it here: [https://github.com/mongodb/mongo/blob/master/debian/init.d](https://github.com/mongodb/mongo/blob/master/debian/init.d). After downloading it and setting it with execution permissions, executing wouldn't bring any joy.
+Tried adding back the **init.d** script which I had found [here](https://github.com/mongodb/mongo/blob/master/debian/init.d), but after installing it, there was still no joy.
 
-{% highlight bash %}
+```shell
 cd /etc/init.d
 
 wget https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d -O mongod
@@ -41,15 +34,16 @@ wget https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d -O mon
 chmod +x mongod
 
 ./mongod start
-{% endhighlight %}
+```
 
-<span style="line-height: 1.75em;">resulting in</span>
+resulting in
 
-{% highlight text %}
+```
 [....] Starting mongod (via systemctl): mongod.serviceFailed to start mongod.service: Unit mongod.service failed to load: No such file or directory.
 failed!
-{% endhighlight %}
+```
 
-# The actual solution
+## Final solution
 
-For that, I've put together an install script that could handle it all for you. https://gist.github.com/w0rldart/21b9b8544fa7b6fbf0e2 Enjoy!
+I've put together an install script that could handle it all for you
+<script src="https://gist.github.com/w0rldart/21b9b8544fa7b6fbf0e2.js"></script>
