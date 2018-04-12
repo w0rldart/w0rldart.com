@@ -5,12 +5,14 @@
     <body>
         {% include header.html %}
 
-        <article class="content">
+        <article class="post content">
             {% unless page.title_hidden %}
-            <h1 id="title">{{ page.title }}</h1>
-            <info datetime="{{ page.date | date: " %Y-%m-%d " }}">
-                {{ page.date | date: "%b %e, %Y" }}
-            </info>
+            <div class="title">
+                <h1>{{ page.title }}</h1>
+                <info datetime="{{ page.date | date: " %Y-%m-%d " }}">
+                    {{ page.date | date: "%b %e, %Y" }}
+                </info>
+            </div>
             {% endunless %}
 
             {{ content }}
