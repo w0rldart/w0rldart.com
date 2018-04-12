@@ -1,19 +1,27 @@
-.posts {
-    .post {
-        .title {
+.posts {}
 
+.post {
+    .title {
+        border-bottom: 10px solid #eee;
+
+        h1 {
+            display: inline;
         }
 
-        .body {
-            p {
-                // text-align: justify;
-                
-                info {
-                    display: inline;
-                    color: #ddd;
-                    white-space: nowrap;
-                }
-            } 
+        info {
+            font-size: 12px;
+        }
+    }
+
+    .body {
+        p {
+            // text-align: justify;
+
+            info {
+                display: inline;
+                color: #ddd;
+                white-space: nowrap;
+            }
         }
     }
 }
