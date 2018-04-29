@@ -1,0 +1,36 @@
+.skills {
+    list-style: none;
+
+    .skill {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
+    h4 {
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-bottom: 0;
+        padding: 10px;
+
+        a {
+            color: #222;
+            text-decoration: none;
+
+            -webkit-transition: color 0.3s;
+            -moz-transition: color 0.3s;
+            -o-transition: color 0.3s;
+            transition: color 0.3s;
+
+            &:hover {
+                color: #0FA0CE;
+                text-decoration: none;
+
+                -webkit-transition: color 0.3s;
+                -moz-transition: color 0.3s;
+                -o-transition: color 0.3s;
+                transition: color 0.3s;
+            }
+        }
+    }
+}
