@@ -1,4 +1,8 @@
-.posts {}
+.posts {
+    .post {
+        margin-bottom: 40px;
+    }
+}
 
 .post {
     .title {
@@ -13,15 +17,11 @@
         }
     }
 
-    .body {
-        p {
-            // text-align: justify;
-
-            info {
-                display: inline;
-                color: #ddd;
-                white-space: nowrap;
-            }
+    p {
+        info {
+            display: inline;
+            color: #ddd;
+            white-space: nowrap;
         }
     }
 }
