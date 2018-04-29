@@ -9,5 +9,8 @@
     { "name": "MySQL", "link": "https://www.mysql.com/" },
     { "name": "DigitalOcean", "link": "https://www.digitalocean.com/" },
     { "name": "Python", "link": "https://www.python.org/" },
-    { "name": "Packer", "link": "https://www.packer.io/" }
+    { "name": "Packer", "link": "https://www.packer.io/" },
+    { "name": "Chef", "link": "https://www.chef.io/" },
+    { "name": "GoCD", "link": "https://www.gocd.org/" },
+    { "name": "Sceptre", "link": "https://github.com/cloudreach/sceptre" }
 ]
