@@ -23,7 +23,6 @@ Active: failed (Result: exit-code) since Tue 2016-01-12 17:37:43 GMT; 6min ago
 and also, there is no **init.d** file for **mongod**
 
 ## Tried this, doesn't work
-
 Tried adding back the **init.d** script which I had found [here](https://github.com/mongodb/mongo/blob/master/debian/init.d), but after installing it, there was still no joy.
 
 ```shell
@@ -44,6 +43,5 @@ failed!
 ```
 
 ## Final solution
-
 I've put together an install script that could handle it all for you
 <script src="https://gist.github.com/w0rldart/21b9b8544fa7b6fbf0e2.js"></script>
