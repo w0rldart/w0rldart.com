@@ -10,6 +10,10 @@ header.navbar {
         display: flex;
         flex-direction: column;
         justify-content: center;
+
+        img {
+            max-width: 50px;
+        }
     }
 
     nav.navbar-list {
