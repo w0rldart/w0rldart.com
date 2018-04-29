@@ -1,9 +1,15 @@
+// Posts on index
 .posts {
     .post {
         margin-bottom: 40px;
+
+        &:first-child h2 {
+            margin-top: 0;
+        }
     }
 }
 
+// Post page
 .post {
     .title {
         border-bottom: 10px solid #eee;
