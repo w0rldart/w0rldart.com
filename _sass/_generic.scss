@@ -29,6 +29,16 @@ body {
 
 a {
     text-decoration: none;
+    text-rendering: optimizeLegibility;
+    text-rendering: geometricPrecision;
+
+    &:visited {
+        color: blue;
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 p,
