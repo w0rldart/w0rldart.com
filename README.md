@@ -1,9 +1,8 @@
-# Resources
- - Skeleton Framework: https://skeleton-framework.github.io/
- - Supported highlighters: https://haisum.github.io/2014/11/07/jekyll-pygments-supported-highlighters/
- - Inspiration: https://rsms.me/wasm-intro
+# About
+Rewrote my site with [Jekyll](https://jekyllrb.com/) and proxied it via
+[Cloudflare](https://www.cloudflare.com/) to take advantage of their amazing features
 
-# Notes
+# Usage
 For testing this locally, you need to
  - `gem install github-pages`
  - `jekyll build`
