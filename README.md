@@ -9,5 +9,5 @@ Rewrote my site with [Jekyll](https://jekyllrb.com/) and proxied it via
 # Usage
 For testing this locally, you need to
  - `bundler install` - This will install all Gem dependencies from `Gemfile`
- - `jekyll build`
- - `jekyll serve`
+ - `bundle exec jekyll build`
+ - `bundle exec jekyll serve`
