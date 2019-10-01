@@ -246,6 +246,7 @@ DEPENDENCIES
   github-pages
   jekyll
   jekyll-coffeescript
+  jekyll-redirect-from
   jekyll-sitemap
 
 BUNDLED WITH

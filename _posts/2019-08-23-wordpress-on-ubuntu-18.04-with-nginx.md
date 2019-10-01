@@ -193,7 +193,7 @@ $ sudo mkdir /etc/nginx/sites-available && sudo mkdir /etc/nginx/sites-enabled
 $ sudo nano /etc/nginx/sites-available/your_domain.com
 ```
 
-```text
+```nginx
 server {
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
@@ -321,7 +321,7 @@ After that, Let’s Encrypt Client has installed your certificate and configured
 If you check your site’s Nginx configuration file, `/etc/nginx/sites-available/your_domain.com`, you’ll notice
 that some modifications have been made by the Let’s Encrypt client.
 
-```text
+```nginx
 . . .
 
     listen 443 ssl; # managed by Certbot
@@ -341,7 +341,6 @@ server {
     listen 80;
     server_name your_domain.com;
     return 404; # managed by Certbot
-
 }
 ```
 
