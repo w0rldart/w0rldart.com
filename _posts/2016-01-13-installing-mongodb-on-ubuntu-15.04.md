@@ -5,7 +5,7 @@ date: 2016-01-13 19:23:01 -0600
 categories: ubuntu mongodb linux
 ---
 
-Starting with ubuntu 15.04, [Upstart](http://upstart.ubuntu.com/) has been replaced with [systemd](http://freedesktop.org/wiki/Software/systemd/), and whilst installing [MongoDB](http://mongodb.com) was no issue, there was no way of having it running as a service by default.
+Starting with ubuntu 15.04, [Upstart](http://upstart.ubuntu.com/) has been replaced with [systemd](http://freedesktop.org/wiki/Software/systemd/), and whilst installing [MongoDB](http://mongodb.com) was no issue, there was no way of having it running as a service by default.
 
 First clue comes when installing MongoDB ([Install steps](https://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/#import-the-public-key-used-by-the-package-management-system)) with the following message:
 ```
@@ -20,7 +20,7 @@ Active: failed (Result: exit-code) since Tue 2016-01-12 17:37:43 GMT; 6min ago
 .....
 ```
 
-and also, there is no **init.d** file for **mongod**
+and also, there is no **init.d** file for **mongod**
 
 ## Tried this, doesn't work
 Tried adding back the **init.d** script which I had found [here](https://github.com/mongodb/mongo/blob/master/debian/init.d), but after installing it, there was still no joy.
@@ -42,6 +42,6 @@ resulting in
 failed!
 ```
 
-## Final solution
+## Final solution
 I've put together an install script that could handle it all for you
 <script src="https://gist.github.com/w0rldart/21b9b8544fa7b6fbf0e2.js"></script>

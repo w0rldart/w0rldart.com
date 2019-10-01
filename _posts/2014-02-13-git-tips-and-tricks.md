@@ -46,7 +46,7 @@ _Source: [could I change my name and surname in all previous commits?](http://st
 
 ## How many lines of code do I have?
 
-Reading "[How many lines of code is Facebook?](http://www.quora.com/Facebook-Engineering/How-many-lines-of-code-is-Facebook)" question, I found this git gem:
+Reading "[How many lines of code is Facebook?](http://www.quora.com/Facebook-Engineering/How-many-lines-of-code-is-Facebook)" question, I found this git gem:
 
 {% highlight shell %}
 git ls-files | xargs cat | wc -l

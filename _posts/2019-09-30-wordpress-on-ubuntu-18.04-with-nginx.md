@@ -4,24 +4,24 @@ title: "Secured WordPress on LEMP Ubuntu 18.04 with Let's Encrypt"
 categories: nginx wordpress ssl ubuntu php lemp linux mysql mariadb
 ---
 
-# WordPress on LEMP with Let's Encrypt
+## WordPress on LEMP with Let's Encrypt
 
 In this tutorial, you are going to learn how to setup [WordPress][1] on your [Ubuntu 18.04][2] server, running a LEMP setup.
 
-## What is LEMP?
+### What is LEMP?
 
 This is an acronym that describes a [Linux][3] operating system, with an Nginx (pronounced like “Engine-X”) web server,
 a MySQL / MariaDB database server and the dynamic processing is handled by PHP.
 
 [**L**inux][3] [**E**ngine-X][4] [**M**ySQL][5] [**P**HP][6]
 
-## What is Let's Encrypt?
+### What is Let's Encrypt?
 
 [Let’s Encrypt][7] is a Certificate Authority (CA) that provides an easy way to obtain and install free TLS/SSL certificates,
 thereby enabling encrypted HTTPS on web servers. It simplifies the process by providing a software client, [Certbot][8],
 that attempts to automate most (if not all) of the required steps.
 
-## Prerequisites
+### Prerequisites
 
  - A server (I run my servers on [DigitalOcean][9] *\**)
  - Ubuntu 18.04 installed
@@ -29,9 +29,9 @@ that attempts to automate most (if not all) of the required steps.
 
 *\* Signing up to DigitalOcean via that link, you receive a $50, 30-day credit as soon as you add a valid payment method to your account.*
 
-# Installation steps
+## Installation steps
 
-## Step 1: Create a `sudo` user
+### Step 1: Create a `sudo` user
 
 Since we will be completing the steps in this guide using a non-root user with sudo privileges, we need to create a user for that.
 
@@ -62,7 +62,7 @@ $ ssh santa@your_server_ip
 $ sudo ufw app list
 ```
 
-## Step 2: Setup the firewall
+### Step 2: Setup the firewall
 
 Ubuntu 18.04 servers comes by default with the UFW firewall, and can be setup to make sure only certain connections are allowed.
 
@@ -80,7 +80,7 @@ $ sudo ufw enable
 $ sudo ufw status
 ```
 
-## Step 3: Install the Nginx Web Server
+### Step 3: Install the Nginx Web Server
 
 Installing Nginx is pretty straight forward:
 
@@ -91,7 +91,7 @@ $ sudo apt-get update && sudo apt-get install nginx
 
 Then just open a new browser tab, enter your server IP Address and you should see a `Welcom to nginx!` message.
 
-## Step 4: Install MySQL
+### Step 4: Install MySQL
 
 Here we're going to use MySQL, but alternatively you could also use MariaDB. More about it on this [Linuxize article][11]
 
@@ -126,7 +126,7 @@ $ mysql -u root -p
 mysql> CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 # Create a separate MySQL user account that we will use exclusively to operate on our new database
-# wordpressuser and password are the credentials, but you should swap for your custom ones
+# wordpressuser and password are the credentials, but you should swap for your custom ones
 mysql> GRANT ALL ON wordpress.* TO 'wordpressuser'@'localhost' IDENTIFIED BY 'password';
 
 # Flush the privileges so that the current instance of MySQL knows about the recent changes we’ve made
@@ -136,7 +136,7 @@ mysql> FLUSH PRIVILEGES;
 mysql> EXIT;
 ```
 
-## Step 5: Install PHP
+### Step 5: Install PHP
 In this step we'll install the PHP extensions required for WordPress to run and for Nginx to process PHP (`php-fpm`).
 
 ```bash
@@ -175,11 +175,11 @@ date.timezone = Europe/Berlin
 ```
 
 ```bash
-# Restart PHP
+# Restart PHP
 $ service php7.2-fpm restart
 ```
 
-## Step 6: Adjust Nginx to serve PHP
+### Step 6: Adjust Nginx to serve PHP
 We need a few minor adjustments to our Nginx server block files to be able to serve PHP / WordPress.
 
 **Replace `your_domain.com` with your actual domain.**
@@ -219,7 +219,7 @@ server {
     }
 
     # Disable logging for these static requests and will mark them as
-    # highly cacheable since these are typically expensive resources to serve
+    # highly cacheable since these are typically expensive resources to serve
     location = /favicon.ico { log_not_found off; access_log off; }
     location = /robots.txt { log_not_found off; access_log off; allow all; }
     location ~* \.(css|gif|ico|jpeg|jpg|js|png)$ {
@@ -243,23 +243,23 @@ server {
 # Create a simlink to enable your virtual host
 $ sudo ln -s /etc/nginx/sites-available/your_domain.com /etc/nginx/sites-enabled/your_domain.com
 
-# Restart nginx server
+# Restart nginx server
 $ sudo service nginx restart
 ```
 
-## Step 7: Download and configure WordPress
+### Step 7: Download and configure WordPress
 
 ```bash
 # Download latest WordPress version
 $ cd /tmp && wget https://wordpress.org/latest.tar.gz
 
-# Unpack it
+# Unpack it
 $ tar -zxvf latest.tar.gz
 
 # Move it from tmp to /var/www
 $ sudo rm -rf /var/www/html && sudo mv wordpress /var/www/html
 
-# Set the correct permissions
+# Set the correct permissions
 $ sudo chown -R www-data:www-data /var/www/html/ && sudo chmod -R 755 /var/www/html/
 
 # Edit WordPress configuration
@@ -287,16 +287,16 @@ define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 ```
 
-## Step 8: Obtain and Configure the Let’s Encrypt SSL Certificates
+### Step 8: Obtain and Configure the Let’s Encrypt SSL Certificates
 
 ```bash
-# First, add the Certbot repository
+# First, add the Certbot repository
 $ sudo add-apt-repository ppa:certbot/certbot
 
-# Install Certbot and Certbot Nginx plugin
+# Install Certbot and Certbot Nginx plugin
 $ sudo apt-get update && sudo apt-get install python-certbot-nginx
 
-# Obtain your free Let’s Encrypt SSL/TLS certificate
+# Obtain your free Let’s Encrypt SSL/TLS certificate
 $ sudo certbot --nginx -m your@email.com -d your_domain.com
 ```
 
@@ -346,7 +346,7 @@ server {
 
 Your WordPress site is now ready to be used over HTTPS.
 
-## Step 9: Finalize the WordPress Installation
+## Step 9: Finalize the WordPress Installation
 
 The final step is to complete the WordPress installation through the web interface.
 To do this, just navigate in your browser to your domain ( https://your_domain.com ),
