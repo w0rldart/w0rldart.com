@@ -1,16 +1,17 @@
 [
     { "name": "Terraform", "link": "https://www.terraform.io/" },
     { "name": "Ansible", "link": "https://www.ansible.com/" },
-    { "name": "AWS", "link": "https://aws.amazon.com/" },
     { "name": "Jenkins", "link": "https://jenkins.io/" },
     { "name": "NodeJS", "link": "https://nodejs.org/en/" },
     { "name": "MongoDB", "link": "https://www.mongodb.com/" },
     { "name": "PHP", "link": "https://secure.php.net/" },
     { "name": "MySQL", "link": "https://www.mysql.com/" },
-    { "name": "DigitalOcean", "link": "https://www.digitalocean.com/" },
+    { "name": "DigitalOcean", "link": "https://m.do.co/c/b3ef1a9e67b9" },
     { "name": "Python", "link": "https://www.python.org/" },
     { "name": "Packer", "link": "https://www.packer.io/" },
     { "name": "Chef", "link": "https://www.chef.io/" },
     { "name": "GoCD", "link": "https://www.gocd.org/" },
-    { "name": "Sceptre", "link": "https://github.com/cloudreach/sceptre" }
+    { "name": "Pulumi", "link": "https://www.pulumi.com/docs/index.html" },
+    { "name": "Sceptre", "link": "https://github.com/cloudreach/sceptre" },
+    { "name": "Cloudflare", "link": "https://cloudflare.com" }
 ]
