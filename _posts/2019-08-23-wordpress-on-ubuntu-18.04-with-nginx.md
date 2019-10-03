@@ -5,9 +5,26 @@ description: "WordPress is the most popular CMS on the internet. This article is
 categories: nginx wordpress ssl ubuntu php lemp linux mysql mariadb
 ---
 
-## WordPress on LEMP with Let's Encrypt
-
 This tutorial will teach you how to setup [WordPress][1] on your [Ubuntu 18.04][2] server with a LEMP stack.
+
+## Index
+
+- [WordPress on LEMP with Let's Encrypt](#wordpress-on-lemp-with-lets-encrypt)
+  - [What is LEMP](#what-is-lemp)
+  - [What is Let's Encrypt?](#what-is-lets-encrypt)
+  - [Prerequisites](#prerequisites)
+- [Installation steps](#installation-steps)
+  - [Step 1: Create a sudo user](#step-1-create-a-sudo-user)
+  - [Step 2: Setup the firewall](#step-2-setup-the-firewall)
+  - [Step 3: Install Nginx web server](#step-3-install-nginx-web-werver)
+  - [Step 4: Install MySQL database server](#step-4-install-mysql-database-server)
+  - [Step 5: Install PHP](#step-5-install-php)
+  - [Step 6: Configure Nginx to serve PHP](#step-6-configure-nginx-to-serve-php)
+  - [Step 7: Download and configure WordPress](#step-7-download-and-configure-wordpress)
+  - [Step 8: Obtain and configure the SSL Certificate with Let's Encrypt](#step-8-obtain-and-configure-the-ssl-certificate-with-lets-encrypt)
+  - [Step 9: Finalize the WordPress installation](#step-9-finalize-the-wordpress-installation)
+
+## WordPress on LEMP with Let's Encrypt
 
 ### What is LEMP?
 
@@ -81,7 +98,7 @@ $ sudo ufw enable
 $ sudo ufw status
 ```
 
-### Step 3: Install the Nginx Web Server
+### Step 3: Install Nginx web werver
 
 Installing Nginx is pretty straight forward:
 
@@ -92,7 +109,7 @@ $ sudo apt-get update && sudo apt-get install nginx
 
 Then just open a new browser tab, enter your server IP Address and you should see a `Welcom to nginx!` message.
 
-### Step 4: Install MySQL
+### Step 4: Install MySQL database server
 
 Here we're going to use MySQL, but alternatively you could also use MariaDB. More about it on this [Linuxize article][11]
 
@@ -118,6 +135,7 @@ Disallow root login remotely? [Y/n]: Y
 Remove test database and access to it? [Y/n]: Y
 Reload privilege tables now? [Y/n]: Y
 ```
+Next, create the database, user and password for Wordpress.
 
 ```bash
 # Login to your database server
@@ -175,12 +193,14 @@ max_execution_time = 360
 date.timezone = Europe/Berlin
 ```
 
+And finally
+
 ```bash
 # Restart PHP
 $ service php7.2-fpm restart
 ```
 
-### Step 6: Adjust Nginx to serve PHP
+### Step 6: Configure Nginx to serve PHP
 We need a few minor adjustments to our Nginx server block files to be able to serve PHP / WordPress.
 
 **Replace `your_domain.com` with your actual domain.**
@@ -192,6 +212,9 @@ $ sudo mkdir /etc/nginx/sites-available && sudo mkdir /etc/nginx/sites-enabled
 # Create your virtual host
 $ sudo nano /etc/nginx/sites-available/your_domain.com
 ```
+
+This set of instructions will tell Nginx to listen for requests to `your_domain.com`
+and server your WordPress site.
 
 ```nginx
 server {
@@ -240,6 +263,8 @@ server {
 }
 ```
 
+Last thing remaining is to enable the site and restart Nginx
+
 ```bash
 # Create a simlink to enable your virtual host
 $ sudo ln -s /etc/nginx/sites-available/your_domain.com /etc/nginx/sites-enabled/your_domain.com
@@ -266,6 +291,9 @@ $ curl -s https://api.wordpress.org/secret-key/1.1/salt/
 # Edit WordPress configuration
 $ sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php && sudo nano /var/www/html/wp-config.php
 ```
+
+These are WordPress configuration parameters that you need to adjust
+in order to establish a connection between your application and the database.
 
 ```php
 // ** MySQL settings - You can get this info from your web host ** //
@@ -312,7 +340,7 @@ Finally, set the permissions right
 $ sudo chown -R www-data:www-data /var/www/html/ && sudo chmod -R 755 /var/www/html/
 ```
 
-### Step 8: Obtain and Configure the Let’s Encrypt SSL Certificates
+### Step 8: Obtain and configure the SSL Certificate with Let's Encrypt
 
 ```bash
 # First, add the Certbot repository
@@ -373,7 +401,7 @@ Your WordPress site is now ready to be used over HTTPS.
 ## Step 9: Finalize the WordPress Installation
 
 The final step is to complete the WordPress installation through the web interface.
-To do this, just navigate in your browser to your domain ( https://your_domain.com ),
+To do this, just navigate in your browser to your domain (`https://your_domain.com`),
 and you’ll be guided through the easy process of installing WordPress.
 
 [1]: https://wordpress.org/
