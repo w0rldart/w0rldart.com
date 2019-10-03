@@ -10,15 +10,17 @@ layout: default
                 {{ post.title }}
             </a>
         </h2>
+
         <p>
             {% if post.description %}
                 {{ post.description | markdownify | strip_html }}
             {% else %}
                 {{ post.excerpt | strip_html }}
             {% endif %}
-            <info>
+
+            <span class="info">
                 {{ post.date | date: "%b %Y" }}
-            </info>
+            </span>
         </p>
     </article>
     {% endfor %}

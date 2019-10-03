@@ -5,18 +5,38 @@
     <body>
         {% include header.html %}
 
-        <article class="post content">
-            {% unless page.title_hidden %}
-            <div class="title">
-                <h1>{{ page.title }}</h1>
-                <info datetime="{{ page.date | date: " %Y-%m-%d " }}">
-                    {{ page.date | date: "%b %e, %Y" }}
-                </info>
-            </div>
-            {% endunless %}
+        <section class="contaier">
+            <article class="post">
+                {% unless page.title_hidden %}
+                <section class="title">
+                    <h1>{{ page.title }}</h1>
+                    <span class="info" datetime="{{ page.date | date: '%Y-%m-%d' }}">
+                        {{ page.date | date: "%b %e, %Y" }}
+                    </span>
+                </section>
+                {% endunless %}
 
-            {{ content }}
-        </article>
+                <section class="content">
+                    {{ content }}
+                </section>
+
+                <section class="disqus">
+                    <br/><hr/><br/>
+                    <div id="disqus_thread"></div>
+                    <script>
+                        (function() { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://w0rldart.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                        })();
+                        </script>
+                        <noscript>
+                            Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                        </noscript>
+                </section>
+            </article>
+        </section>
 
         {% include footer.html %}
         {% include bottom_scripts.html %}
