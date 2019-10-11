@@ -2,44 +2,82 @@
 layout: default
 ---
 
-<section title="Introduction">
-    <h1>About me</h1>
-    <p>
-        My name is Alex and I'm a Cloud Systems and Software Engineer based in Zûrich, Switzerland, certified and experienced in
-        <a href="https://aws.amazon.com/" target="_blank">AWS (Amazon Web Services)</a>, <a href="https://azure.microsoft.com/en-us/" target="_blank">Microsoft Azure</a>,
-        <a href="https://cloud.google.com/" target="_blank">Google Cloud</a> and <a href="https://www.alibabacloud.com/" target="_blank">Alibaba</a>.
-    </p>
-    <p>
-        <a href="https://en.wikipedia.org/wiki/Infrastructure_as_Code" target="_blank"><strong>Infrastucture as Code</strong></a> is at the base of my work,
-        to help maintain, reproduce and track the deployments, provisioning and configuration of infrastructure.
-    </p>
-    <p>
-        Enjoy taking on challenges and learning new abilities, and as of such, have recently cycled across Europe for about 3 months and over 4000kms, wildcamping almost all the way.
-        Listen and read a lot about personal development, mindfulness and ways to optimize the body and the mind (big fan of saunas and ice baths).
-        I'm also fluent in 3 languages English, Spanish and Romanian and actively learning French and German.
-    </p>
+<section class="row" title="Introduction">
+    <div class="column">
+        <h1>About me</h1>
+        <p>
+            My name is Alex and I'm a Cloud Systems and Software Engineer based in Zûrich, Switzerland, certified and
+            experienced in
+            <a href="https://aws.amazon.com/" target="_blank">AWS (Amazon Web Services)</a>, <a
+                href="https://azure.microsoft.com/en-us/" target="_blank">Microsoft Azure</a>,
+            <a href="https://cloud.google.com/" target="_blank">Google Cloud</a> and <a
+                href="https://www.alibabacloud.com/" target="_blank">Alibaba</a>.
+        </p>
+        <p>
+            <a href="https://en.wikipedia.org/wiki/Infrastructure_as_Code" target="_blank"><strong>Infrastucture as
+                    Code</strong></a> is at the base of my work,
+            to help maintain, reproduce and track the deployments, provisioning and configuration of infrastructure.
+        </p>
+        <p>
+            Enjoy taking on challenges and learning new abilities, and as of such, have recently cycled across Europe
+            for about 3 months and over 4000kms, wildcamping almost all the way.
+            Listen and read a lot about personal development, mindfulness and ways to optimize the body and the mind
+            (big fan of saunas and ice baths).
+            I'm also fluent in 3 languages English, Spanish and Romanian and actively learning French and German.
+        </p>
+    </div>
 </section>
-<section title="Certifications">
-    <h2>Certifications</h2>
-    <ul>
-        <li>AWS Certified Solutions Architect - Associate</li>
-        <li>AWS Certified Developer - Associate</li>
-        <li>AWS Certified SysOps - Associate</li>
-        <li>Google Cloud Certified Professional - Cloud Architect</li>
-        <li>Microsoft AZ-300: Azure Solutions Architect</li>
-    </ul>
-</section>
-<section title="Skills">
-    <h2>Frequently used technologies</h2>
-    <ul class="skills" class="u-text-center">
-        {% for skill in site.data.skills %}
-        <li class="skill">
-            <h4>
-                <a href="{{ skill.link }}" target="_blank">
-                    {{ skill.name }}
+<section class="row" title="Certifications">
+    <div class="column">
+        <div class="row">
+            <div class="column">
+                <h2>Certifications</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <a href="https://aws.amazon.com/certification/">
+                    <h3>AWS Certified</h3>
                 </a>
-            </h4>
-        </li>
-        {% endfor %}
-    </ul>
+                <ul>
+                    <li>Solutions Architect - Associate</li>
+                    <li>Developer - Associate</li>
+                    <li>SysOps - Associate</li>
+                </ul>
+            </div>
+            <div class="column">
+                <a href="https://cloud.google.com/certification/">
+                    <h3>Google Cloud Certified</h3>
+                </a>
+                <ul>
+                    <li>Professional - Cloud Architect</li>
+                </ul>
+            </div>
+            <div class="column">
+                <a href="https://www.microsoft.com/en-us/learning/certification-overview.aspx">
+                    <h3>Microsoft Azure</h3>
+                </a>
+                <ul>
+                    <li>AZ-300: Azure Solutions Architect</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </section>
+<section class="row" title="Skills">
+    <div class="column">
+        <h2>Frequently used technologies</h2>
+        <ul class="skills" class="u-text-center">
+            {% for skill in site.data.skills %}
+            <li class="skill">
+                <h4>
+                    <a href="{{ skill.link }}" target="_blank">
+                        {{ skill.name }}
+                    </a>
+                </h4>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+</div>

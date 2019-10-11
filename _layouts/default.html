@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: en }}">
-    {% include html-head.html %}
+<!doctype html>
+<html class="no-js" lang="{{ page.lang | default: site.lang | default: en }}">
+{% include html-head.html %}
 
-    <body>
-        {% include header.html %}
+<body>
+    {% include header.html %}
 
-        <div class="container">
-            {{ content }}
-        </div>
+    <div class="container">
+        {{ content }}
+    </div>
 
-        {% include footer.html %}
-        {% include bottom_scripts.html %}
-    </body>
+    {% include footer.html %}
+    {% include bottom_scripts.html %}
+</body>
 
 </html>

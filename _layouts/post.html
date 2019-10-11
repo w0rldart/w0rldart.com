@@ -1,45 +1,46 @@
-<!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: en }}">
-    {% include html-head.html %}
+<!doctype html>
+<html class="no-js" lang="{{ page.lang | default: site.lang | default: en }}">
+{% include html-head.html %}
 
-    <body>
-        {% include header.html %}
+<body>
+    {% include header.html %}
 
-        <section class="contaier">
-            <article class="post">
-                {% unless page.title_hidden %}
-                <section class="title">
-                    <h1>{{ page.title }}</h1>
-                    <span class="info" datetime="{{ page.date | date: '%Y-%m-%d' }}">
-                        {{ page.date | date: "%b %e, %Y" }}
-                    </span>
-                </section>
-                {% endunless %}
+    <section class="container">
+        <article class="column post">
+            {% unless page.title_hidden %}
+            <section class="title">
+                <h1>{{ page.title }}</h1>
+            </section>
 
-                <section class="content">
-                    {{ content }}
-                </section>
+            <span class="info" datetime="{{ page.date | date: '%Y-%m-%d' }}">
+                {{ page.date | date: "%b %e, %Y" }}
+            </span>
+            {% endunless %}
 
-                <section class="disqus">
-                    <br/><hr/><br/>
-                    <div id="disqus_thread"></div>
-                    <script>
-                        (function() { // DON'T EDIT BELOW THIS LINE
+            <section class="content">
+                {{ content }}
+            </section>
+
+            <section class="disqus">
+                <br /><hr /><br />
+                <div id="disqus_thread"></div>
+                <script>
+                    (function () { // DON'T EDIT BELOW THIS LINE
                         var d = document, s = d.createElement('script');
                         s.src = 'https://w0rldart.disqus.com/embed.js';
                         s.setAttribute('data-timestamp', +new Date());
                         (d.head || d.body).appendChild(s);
-                        })();
-                        </script>
-                        <noscript>
-                            Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-                        </noscript>
-                </section>
-            </article>
-        </section>
+                    })();
+                </script>
+                <noscript>
+                    Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+            </section>
+        </article>
+    </section>
 
-        {% include footer.html %}
-        {% include bottom_scripts.html %}
-    </body>
+    {% include footer.html %}
+    {% include bottom_scripts.html %}
+</body>
 
 </html>

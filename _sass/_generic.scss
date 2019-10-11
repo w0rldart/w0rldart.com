@@ -1,63 +1,53 @@
-@viewport {
-    width: device-width;
-}
-
 body {
-    background: #fff;
-    color: #222;
-    font-family: 'Courier New', monospace;
-    font-size: 1rem;
-    line-height: 1.6rem;
-    font-weight: 400;
-    width: 100%;
-    max-width: 1024px;
-    margin: 0 auto;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    font-smoothing: subpixel-antialiased;
-    -webkit-font-smoothing: subpixel-antialiased;
-    -webkit-overflow-scrolling: touch;
+    margin      : 0 auto;
+
     scroll-behavior: smooth;
+
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust    : 100%;
+
+    font-smoothing        : subpixel-antialiased;
+    -webkit-font-smoothing: subpixel-antialiased;
+
     text-rendering: optimizeLegibility;
     text-rendering: geometricPrecision;
-    -moz-font-feature-settings: "kern" 1, "liga" 1;
-    -ms-font-feature-settings: "kern" 1, "liga" 1;
-    -o-font-feature-settings: "kern" 1, "liga" 1;
-    -webkit-font-feature-settings: "kern" 1, "liga" 1;
-    font-feature-settings: "kern" 1, "liga" 1;
 }
 
 a {
     text-decoration: none;
-    text-rendering: optimizeLegibility;
-    text-rendering: geometricPrecision;
+    text-rendering : optimizeLegibility;
+    text-rendering : geometricPrecision;
 
-    &:visited {
-        color: blue;
-    }
-
-    &:hover {
-        text-decoration: underline;
-    }
+    color: #039be5;
 }
 
-p,
-ul,
-ol,
-pre,
-blockquote,
-hr,
-object {
+/*
+ * Custom heading sizes
+ */
+h1 {
+    font-size: 3.8rem;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2.2rem;
+}
+
+h4 {
+    font-size: 1.8rem;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+ hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
     margin: 1em 0;
-}
-
-header,
-.container,
-footer {
-    margin: 0 32px;
-}
-
-.container h1:first-child,
-.container h2:first-child {
-    margin-top: 0;
-}
+    padding: 0;
+  }

@@ -1,4 +1,5 @@
 permalink: /:title
+highlighter: rouge
 plugins:
     - jekyll-coffeescript
     - jekyll-sitemap

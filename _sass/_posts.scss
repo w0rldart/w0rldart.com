@@ -1,27 +1,22 @@
 // Post page
 .post {
     .title {
-        border-bottom: 10px solid #eee;
+        border-bottom: 1rem solid #eee;
+        margin-bottom: 1rem;
 
         h1 {
-            display: inline;
+            margin: 0;
         }
+    }
 
-        span.info {
-            font-size: 12px;
-        }
+    span.info {
+        font-size: 12px;
+        margin-bottom: 1rem;
+        display: block;
     }
 
     h2 {
         text-decoration: underline;
-    }
-
-    p {
-        span.info {
-            display: inline;
-            color: #ddd;
-            white-space: nowrap;
-        }
     }
 }
 
@@ -29,9 +24,18 @@
 .posts {
     .post {
         margin-bottom: 40px;
-    }
 
-    h2 {
-        text-decoration: none;
+        h2.title {
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            span.info {
+                display: inline;
+                color: #aaa;
+                white-space: nowrap;
+            }
+        }
     }
 }

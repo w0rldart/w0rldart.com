@@ -2,12 +2,12 @@
 # w0rldart.com css
 ---
 
-@import 'vendors/normalize';
+@import 'milligram';
 
 @import 'generic';
-@import 'typo';
 @import 'code';
 @import 'header';
 @import 'footer';
-@import 'posts';
 @import 'about';
+@import 'posts';
+@import 'responsive';
