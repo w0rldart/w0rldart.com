@@ -475,13 +475,13 @@ a:hover {
   color: #606c76;
 }
 
-dl,
-ol,
-ul {
-  list-style  : none;
-  margin-top  : 0;
-  padding-left: 0;
-}
+// dl,
+// ol,
+// ul {
+//   list-style  : none;
+//   margin-top  : 0;
+//   padding-left: 0;
+// }
 
 dl dl,
 dl ol,
@@ -493,16 +493,16 @@ ul dl,
 ul ol,
 ul ul {
   font-size: 90%;
-  margin   : 1.5rem 0 1.5rem 3.0rem;
+  // margin   : 1.5rem 0 1.5rem 3.0rem;
 }
 
-ol {
-  list-style: decimal inside;
-}
+// ol {
+//   list-style: decimal inside;
+// }
 
-ul {
-  list-style: circle inside;
-}
+// ul {
+//   list-style: circle inside;
+// }
 
 .button,
 button,
