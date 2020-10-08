@@ -1,23 +1,20 @@
 ---
 layout: default
 ---
-
 <section class="posts">
     {% for post in site.posts limit:20 %}
     <article class="post">
-        <h2 class="title">
-            <a href="{{ post.url }}">
+        <a href="{{ post.url }}">
+            <h2 class="title">
                 {{ post.title }}
-            </a>
-        </h2>
-
+            </h2>
+        </a>
         <p>
             {% if post.description %}
                 {{ post.description | markdownify | strip_html }}
             {% else %}
                 {{ post.excerpt | strip_html }}
             {% endif %}
-
             <span class="info">
                 {{ post.date | date: "%b %Y" }}
             </span>
