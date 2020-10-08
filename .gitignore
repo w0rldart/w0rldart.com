@@ -1,2 +1,13 @@
+# OS-specific
+.DS_Store
+
+# Editor swapfiles
+.*.sw?
+*~
+
+# Jekyll stuff
 _site/
 .sass-cache/
+
+# IDEs
+.vscode/
