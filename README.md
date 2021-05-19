@@ -1,13 +1,13 @@
 # About
-Rewrote my site with [Jekyll](https://jekyllrb.com/) and proxied it via
-[Cloudflare](https://www.cloudflare.com/) to take advantage of their amazing features
+Personal website built with [Jekyll](https://jekyllrb.com/) and proxied it via [Cloudflare](https://www.cloudflare.com/)
 
 # Requirements
- * [Ruby](https://www.ruby-lang.org/en/)
- * [Bundler](https://bundler.io/)
+* [Ruby](https://www.ruby-lang.org/en/) and [Bundler](https://bundler.io/) which can be installed manually or via [rbenv](https://github.com/rbenv/rbenv#using-package-managers) with `rben install # for latest Ruby version` and `gem install bundler`
+* Gem dependencies from `Gemfile` via `bundler install`
+* You might need to reload your shell after installing all the bundles
 
 # Usage
-For testing this locally, you need to
- - `bundler install` - This will install all Gem dependencies from `Gemfile`
  - `bundle exec jekyll build`
  - `bundle exec jekyll serve`
+ - `jekyll build`
+ - `jekyll serve`
