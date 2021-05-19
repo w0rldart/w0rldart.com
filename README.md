@@ -1,5 +1,5 @@
 # About
-Personal website built with [Jekyll](https://jekyllrb.com/) and proxied it via [Cloudflare](https://www.cloudflare.com/)
+Personal website built with [Jekyll](https://jekyllrb.com/) and proxied via [Cloudflare](https://www.cloudflare.com/)
 
 # Requirements
 * [Ruby](https://www.ruby-lang.org/en/) and [Bundler](https://bundler.io/) which can be installed manually or via [rbenv](https://github.com/rbenv/rbenv#using-package-managers) with `rben install # for latest Ruby version` and `gem install bundler`
