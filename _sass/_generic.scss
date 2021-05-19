@@ -1,5 +1,5 @@
 body {
-    margin      : 0 auto;
+    margin: 0 auto;
 
     scroll-behavior: smooth;
 
@@ -43,11 +43,35 @@ h4 {
 /*
  * A better looking default horizontal rule
  */
- hr {
-    display: block;
-    height: 1px;
-    border: 0;
+hr {
+    display   : block;
+    height    : 1px;
+    border    : 0;
     border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-  }
+    margin    : 1em 0;
+    padding   : 0;
+}
+
+/**
+ * Customise milligram
+ */
+textarea {
+    height: auto;
+}
+
+
+fieldset {
+    border-color: #f4f5f6;
+}
+
+legend {
+    padding: 3px 6px;
+}
+
+
+/**
+ * Helpers
+ */
+.hide {
+    display: none;
+}
