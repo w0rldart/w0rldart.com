@@ -123,13 +123,13 @@ For the International Day of Yoga in June, weâ€™re organising a 2 day digital â€
                         <div class="column column-50">
                             <label for="musician">Musician</label>
                             <textarea name="musician" id="musician" rows="10">
-As your music has a positive impact and is inspirational to many in #country#, we'd like to share it, and include you in our event.
+As your music has a positive impact and is inspirational to many in #country#, we'd like to share it and include you in our event.
                             </textarea>
                         </div>
                         <div class="column column-50">
                             <label for="actor">Actor/Actress</label>
                             <textarea name="actor" id="actor" rows="10">
-As your shows have had a positive impact and inspirational to many in #country#, we'd like to share it, and include you in our event.
+As your shows have had a positive impact and inspirational to many in #country#, we'd like to share it and include you in our event.
                             </textarea>
                         </div>
                     </div>
@@ -137,7 +137,7 @@ As your shows have had a positive impact and inspirational to many in #country#,
                         <div class="column column-50">
                             <label for="yoga">Yoga</label>
                             <textarea name="yoga" id="yoga" rows="10">
-Your expertise on Yoga has had a positive impact for many in #country#, we'd like to share it, and include you in our event. 
+Your expertise on Yoga has had a positive impact for many in #country#, we'd like to share it and include you in our event. 
                             </textarea>
                         </div>
                         <div class="column column-50">
@@ -231,6 +231,7 @@ Best wishes,
          */
         const sender = formData.get('sender')
         const phoneNumber = formData.get('phoneNumber')
+        const expertise = formData.get('expertise')
 
         /**
          * Gather user data
@@ -257,6 +258,7 @@ Best wishes,
             .replaceAll('#content#', content)
             .replaceAll('#country#', country)
             .replaceAll('#phoneNumber#', phoneNumber)
+            .replaceAll('#expertise#', expertise)
             .replaceAll(/(?:\r\n|\r|\n)/g, '<br/>') // Repalce newlines with <br/>
 
 
