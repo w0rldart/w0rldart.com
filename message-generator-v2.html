@@ -68,7 +68,7 @@ Dear #name#,
 
 I hope you are safe & well. My name is #sender#, from the Isha Foundation.
 
-We were delighted you are following @Sadhguru and are a great fan of your #content#, hence wanted to get in touch for a collaboration.
+We were delighted you are following @Sadhguru and are a great fan of your #category#, hence wanted to get in touch for a collaboration.
                             </textarea>
                         </div>
                         <div class="column column-50">
@@ -77,7 +77,7 @@ We were delighted you are following @Sadhguru and are a great fan of your #conte
 Dear #name#, 
 
 I hope you are safe & well. My name is #sender#, from the Isha Foundation, a United Nations accredited charity, founded by @Sadhguru (NYT bestseller, humanitarian).
-We're a great fan of your #content# and wanted to get in touch for a collaboration.
+We're a great fan of your #category# and wanted to get in touch for a collaboration.
                             </textarea>
                         </div>
                     </div>
@@ -100,7 +100,7 @@ Around the International Day of Yoga this month, Isha is organising a 2 day ’Y
                         <div class="column">
                             <label for="personalisation">All</label>
                             <textarea name="personalisation" id="personalisation" rows="10">
-                                I’ve sent some brochures below for you to read more about it, and hopefully as #expertise#, there might be a session which would work for you.
+I’ve sent some brochures below for you to read more about it, and hopefully as #expertise#, there might be a session which would work for you.
                             </textarea>
                         </div>
                     </div>
@@ -165,15 +165,13 @@ Best wishes,
          */
         const sender = formData.get('sender')
         const phoneNumber = formData.get('phoneNumber')
-        const expertise = formData.get('expertise')
 
         /**
          * Gather user data
          */
         const name = formData.get('name')
-        const messageCategory = formData.get('category')
-        const content = formData.get('content')
-        const country = formData.get('country')
+        const expertise = formData.get('expertise')
+        const category = formData.get('category')
         const followerOfSadhguru = formData.get('follower') === 'on'
 
         /**
@@ -181,18 +179,17 @@ Best wishes,
          */
         let introMessage = followerOfSadhguru ? formData.get('intro-following') : formData.get('intro-not-following')
         let eventParagraph = formData.get('event-paragraph')
-        let tailoredMessage = formData.get(messageCategory)
+        let personalisation = formData.get('personalisation')
         let outro = formData.get('outro')
 
-        let outputMessage = `${introMessage}<br/>${eventParagraph}<br/>${tailoredMessage}<br/>${outro}`
+        let outputMessage = `${introMessage}<br/>${eventParagraph}<br/>${personalisation}<br/>${outro}`
 
         outputMessage = outputMessage
             .replaceAll('#name#', name)
             .replaceAll('#sender#', sender)
-            .replaceAll('#content#', content)
-            .replaceAll('#country#', country)
-            .replaceAll('#phoneNumber#', phoneNumber)
+            .replaceAll('#category#', category)
             .replaceAll('#expertise#', expertise)
+            .replaceAll('#phoneNumber#', phoneNumber)
             .replaceAll(/(?:\r\n|\r|\n)/g, '<br/>') // Repalce newlines with <br/>
 
 
