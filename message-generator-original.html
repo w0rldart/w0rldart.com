@@ -1,0 +1,266 @@
+---
+layout: default
+---
+
+<section title="Data">
+    <div class="row">
+        <h1>Message Generator Original</h1>
+    </div>
+    <form id="message-data" style="width: 100%;">
+        <fieldset>
+            <legend>Volunteer data</legend>
+            <div class="row">
+                <div class="column column-50">
+                    <label for="sender">Sender name</label>
+                    <input type="text" name="sender" id="sender" required>
+                </div>
+                <div class="column column-50">
+                    <label for="phoneNumber">Phone number</label>
+                    <input type="text" name="phoneNumber" id="phoneNumber" required>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Influencer data</legend>
+            <div class="row">
+                <div class="column column-33">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" required>
+                </div>
+                <div class="column column-33">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" required>
+                        <option value="">--Choose--</option>
+                        <option value="musician">Musician</option>
+                        <option value="actor">Actor/Actress</option>
+                        <option value="yoga">Yoga</option>
+                        <option value="athlete">Athlete</option>
+                        <option value="health">Health</option>
+                        <option value="fitness">Fitness</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="column column-33">
+                    <label for="content">Type of content</label>
+                    <select name="content" id="content" required>
+                        <option value="">--Choose--</option>
+                        <option value="channel">Channel</option>
+                        <option value="work">Work</option>
+                        <option value="life">Life</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row row-center">
+                <div class="column column-33">
+                    <label for="country">Country</label>
+                    <input type="text" name="country" id="country" required>
+                </div>
+                <div class="column column-33">
+                    <label for="expertise">Expertise</label>
+                    <input type="text" name="expertise" id="expertise">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column column-20">
+                    <label class="label-inline" for="follwer">Follows @sadhguru?</label>
+                    <input type="checkbox" name="follower" id="follower">
+                </div>
+                <div class="column column-80" style="text-align: right">
+                    <input class="button-primary" type="submit" value="Generate">
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>
+                Settings
+                <small>
+                    <a href="#" onclick="toggleSettings()">(show/hide)</a>
+                </small>
+            </legend>
+            <div id="settings" class="hide">
+                <fieldset>
+                    <legend>Intro</legend>
+                    <div class="row">
+                        <div class="column column-50">
+                            <label for="intro-following">SG followers</label>
+                            <textarea name="intro-following" id="intro-following" rows="10">
+Dear #name#,
+
+I hope you are safe & well. My name is #sender#, from the Isha Foundation.
+
+We were delighted you are following @Sadhguru and are a great fan of your #content#, hence wanted to get in touch for a collaboration.
+                            </textarea>
+                        </div>
+                        <div class="column column-50">
+                            <label for="intro-not-following">NON SG followers</label>
+                            <textarea name="intro-not-following" id="intro-not-following" rows="10">
+Dear #name#, 
+
+I hope you are safe & well. My name is #sender#, from the Isha Foundation, a United Nations accredited charity, founded by @Sadhguru (NYT bestseller, humanitarian).
+We're a great fan of your #content# and wanted to get in touch for a collaboration.
+                            </textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Event paragraph</legend>
+                    <div class="row">
+                        <div class="column">
+                            <label for="event-paragraph">All</label>
+                            <textarea name="event-paragraph" id="event-paragraph" rows="10">
+Around the International Day of Yoga this month, Isha is organising a 2 day ’Yoga Marathon’, with 3 million expected to watch. We’d like to warmly invite you to be a unique celebrity guest during the event. It can be a way for you to reach a new audience, and introduce your community to tools on yoga, nutrition or meditation.
+                            </textarea>
+                        </div>
+                    </div>
+                    </legend>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Personalisation</legend>
+                    <div class="row">
+                        <div class="column column-50">
+                            <label for="musician">Musician</label>
+                            <textarea name="musician" id="musician" rows="10">
+As your music has a positive impact and is inspirational to many in #country#, we'd like to share it and include you in our event.
+                            </textarea>
+                        </div>
+                        <div class="column column-50">
+                            <label for="actor">Actor/Actress</label>
+                            <textarea name="actor" id="actor" rows="10">
+As your shows have had a positive impact and inspirational to many in #country#, we'd like to share it and include you in our event.
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column column-50">
+                            <label for="yoga">Yoga</label>
+                            <textarea name="yoga" id="yoga" rows="10">
+Your expertise on Yoga has had a positive impact on many in #country#, we'd like to share it and include you in our event. 
+                            </textarea>
+                        </div>
+                        <div class="column column-50">
+                            <label for="athlete">Athlete</label>
+                            <textarea name="athlete" id="athlete" rows="10">
+As #expertise#, you've had a positive impact on many in #country#, and we'd like to share it. 
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column column-50">
+                            <label for="health">Health</label>
+                            <textarea name="health" id="health" rows="10">
+As #expertise#, you've had a positive impact on many in #country#, and we'd like to share it. 
+                            </textarea>
+                        </div>
+                        <div class="column column-50">
+                            <label for="fitness">Fitness</label>
+                            <textarea name="fitness" id="fitness" rows="10">
+As #expertise#, you've had a positive impact on many in #country#, and we'd like to share it. 
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column column-50">
+                            <label for="other">Other</label>
+                            <textarea name="other" id="other" rows="10">
+I’ve sent some brochures below for you to read more about it, and hopefully as #expertise#, there might be a session which would work for you.
+                            </textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Outro</legend>
+                    <div class="row">
+                        <div class="column">
+                            <label for="outro">All</label>
+                            <textarea name="outro" id="outro" rows="10">
+Would this be of interest? If so, please let me know in the coming few days. 😊
+
+Best wishes, 
+#sender#
+#phoneNumber#
+                            </textarea>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </fieldset>
+    </form>
+</section>
+<section id="result">
+    <div class="row">
+        <div class="column" id="generated-message"></div>
+    </div>
+</section>
+
+<script>
+    const form = document.getElementById('message-data');
+    const outputBox = document.getElementById('generated-message');
+
+    form.addEventListener('submit', generateMessage);
+
+    function toggleSettings() {
+        const settingsBlock = document.getElementById('settings')
+        if (settingsBlock.classList.contains('hide')) {
+            settingsBlock.classList.remove('hide')
+        } else {
+            settingsBlock.classList.add('hide')
+        }
+    }
+
+    function generateMessage(event, test) {
+        event.preventDefault();
+
+        // Bind the FormData object and the form element
+        const formData = new FormData(form);
+
+        console.log('event', event);
+
+        // Display the key/value pairs
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+
+        /**
+         * Gather volunteer data
+         */
+        const sender = formData.get('sender')
+        const phoneNumber = formData.get('phoneNumber')
+        const expertise = formData.get('expertise')
+
+        /**
+         * Gather user data
+         */
+        const name = formData.get('name')
+        const messageCategory = formData.get('category')
+        const content = formData.get('content')
+        const country = formData.get('country')
+        const followerOfSadhguru = formData.get('follower') === 'on'
+
+        /**
+         * Gather templated messages
+         */
+        let introMessage = followerOfSadhguru ? formData.get('intro-following') : formData.get('intro-not-following')
+        let eventParagraph = formData.get('event-paragraph')
+        let tailoredMessage = formData.get(messageCategory)
+        let outro = formData.get('outro')
+
+        let outputMessage = `${introMessage}<br/>${eventParagraph}<br/>${tailoredMessage}<br/>${outro}`
+
+        outputMessage = outputMessage
+            .replaceAll('#name#', name)
+            .replaceAll('#sender#', sender)
+            .replaceAll('#content#', content)
+            .replaceAll('#country#', country)
+            .replaceAll('#phoneNumber#', phoneNumber)
+            .replaceAll('#expertise#', expertise)
+            .replaceAll(/(?:\r\n|\r|\n)/g, '<br/>') // Repalce newlines with <br/>
+
+
+        outputBox.innerHTML = outputMessage
+        return false;
+    }
+</script>
