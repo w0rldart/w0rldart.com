@@ -2,7 +2,7 @@
 layout: post
 title: "Secured WordPress on LEMP Ubuntu 18.04 with Let's Encrypt"
 description: "WordPress is the most popular CMS on the internet. This article is a starting point to an adecuquate LEMP (Linux, Nginx, MySQL, and PHP) stack configuration on Ubuntu 18.04 , with Let's Encrypt to generate the SSL certificate."
-categories: nginx wordpress ssl ubuntu php lemp linux mysql mariadb
+tags: nginx wordpress ssl ubuntu php lemp linux mysql mariadb
 redirect_from:
   - /wordpress-on-ubuntu-18.04-with-nginx
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "How to fix slow WordPress admin!"
 description: "Possible issues, improvements, and fixes to improve WordPress admin performance"
-categories: wordpress performance slow iptables
+tags: wordpress performance
 ---
 
 One unusual causing factor that is rarely considered or even caught, are the 

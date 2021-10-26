@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "Installing MongoDB on Ubuntu 15.04"
+description: ""
 date: 2016-01-13 19:23:01 -0600
-categories: ubuntu mongodb linux
+tags: ubuntu mongodb linux
 ---
 
 Starting with ubuntu 15.04, [Upstart](http://upstart.ubuntu.com/) has been replaced with [systemd](http://freedesktop.org/wiki/Software/systemd/), and whilst installing [MongoDB](http://mongodb.com) was no issue, there was no way of having it running as a service by default.

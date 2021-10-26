@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "git tips and tricks"
-date: 2014-02-13 10:45:01 -0600
-categories: git
+tags: git
 ---
 
-List of [git](https://git-scm.com/) tips and tricks that I compiled over time. Ping me if you have any others to share.
+Some [git](https://git-scm.com/) tips and tricks that I compiled over time.
+Do you have any to share?
 
 ## How do I change the author of my commits?
 

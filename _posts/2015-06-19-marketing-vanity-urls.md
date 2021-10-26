@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "Marketing vanity URLs"
-date:  2015-06-19 11:57:01 -0600
-categories: marketing web
+tags: marketing seo apache
 ---
 
 Vanity URLs are simple but incredibly efficient redirects to help track marketing campaigns via Google Analytics, in this case, and help build reports or track their effectiveness.

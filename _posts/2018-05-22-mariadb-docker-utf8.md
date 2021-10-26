@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Configuring UTF8 Collation for MySQL or Mariadb on Docker"
-categories: docker mysql mariadb linux
+description: ""
+tags: docker mysql mariadb linux
 ---
 
 Configuring UTF8 character-set/collation for your MySQL or MariaDB service on a Docker container

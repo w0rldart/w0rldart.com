@@ -2,7 +2,7 @@
 layout: post
 title: "How to block outgoing URL calls with iptables on Linux"
 description: "Using iptables to block outgoing URL calls"
-categories: linux iptables 
+tags: linux iptables 
 ---
 
 `iptables` is a command-line firewall utility that uses policy chains to allow or block traffic. When a connection tries to establish itself on your system, iptables looks for a rule in its list to match it to. If it doesn't find one, it resorts to the default action.

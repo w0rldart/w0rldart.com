@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Avoiding SEO penalties for duplicate content on Cloudflare live / non-cached subdomains"
-categories: cloudflare robots dns cdn google
+title: "Avoiding SEO penalties for duplicate content on Cloudflare live/non-cached subdomains"
+tags: cloudflare robots.txt dns cdn google seo
 redirect_from:
   - /cloudflare-direct-subdomain-and-google-duplicate-content-issue
 ---

@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Fixing Chef cluster issues"
-categories: chef elasticsearch cluster linux aws
+description: ""
+tags: chef elasticsearch cluster linux aws
 ---
 
 Chef is a vital part of the infrastructure for many enterprises, as a configuration management tool to automate

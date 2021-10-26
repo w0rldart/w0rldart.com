@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "CSV UTF-8 encoding issues in Excel"
-date: 2015-10-09 16:31:01 -0600
-categories: encoding hacks
+tags: encoding csv hacks
 ---
 
 There's a bug which causes some accented characters to become corrupt before / during / after import or just document edit, when you use Microsoft Excel – this is a known Microsoft bug which has never been fixed.
