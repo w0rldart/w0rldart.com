@@ -10,11 +10,7 @@ layout: default
             </h2>
         </a>
         <p>
-            {% if post.description %}
-                {{ post.description | markdownify | strip_html }}
-            {% else %}
-                {{ post.excerpt | strip_html }}
-            {% endif %}
+            {{ post.excerpt | strip_html }}
             <span class="info">
                 {{ post.date | date: "%b %Y" }}
             </span>

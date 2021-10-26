@@ -1,17 +1,21 @@
-{% assign title = 'Zurich based Cloud and DevOps specialist' %}
+{% assign title = 'Cloud and DevOps specialist in Zurich' %}
 {% assign description = 'Zurich based multi-cloud specialist: AWS, Google, Azure and Alibaba. Cloud development, Software Engineering and DevOps solutions.' %}
 
 {% if page.title %}
     {% assign title = page.title %}
 {% endif %}
 
-{% if page.description %}
-    {% assign description = page.description %}
+{% if page.relative_path contains '_posts/' %}
+    {% if page.description and page.description != '' %}
+        {% assign description = page.description %}
+    {% elsif page.description and page.description == '' %}
+        {% assign description = page.excerpt | strip_html | strip_newlines %}
+    {% endif %}
 {% endif %}
 
 <head>
     <meta charset="utf-8">
-    <title>w0rldart - {{ title }}</title>
+    <title>{{ title }}</title>
     <meta name="description" content="{{ description }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
