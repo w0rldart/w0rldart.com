@@ -10,15 +10,25 @@
             {% unless page.title_hidden %}
             <section class="title">
                 <h1>{{ page.title }}</h1>
-            </section>
 
-            <span class="info" datetime="{{ page.date | date: '%Y-%m-%d' }}">
-                {{ page.date | date: "%b %e, %Y" }}
-            </span>
+                <span class="info" datetime="{{ page.date | date: '%Y-%m-%d' }}">
+                    {{ page.date | date: "%b %e, %Y" }}
+                </span>
+            </section>
             {% endunless %}
 
             <section class="content">
                 {{ content }}
+            </section>
+
+            <section class="tags">
+                <h2>Tags</h2>
+
+                <ul>
+                {% for tag in page.tags %}
+                    <li>{{ tag }}</li>
+                {% endfor %}
+                </ul>
             </section>
 
             <section class="disqus">

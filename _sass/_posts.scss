@@ -18,6 +18,12 @@
     h2 {
         text-decoration: underline;
     }
+
+    .tags li {
+        background-color: rgba(3, 155, 229, 0.5);
+        display: inline;
+        padding: 5px;
+    }
 }
 
 // Posts on index
