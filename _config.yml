@@ -1,8 +1,23 @@
+
+url: https://w0rldart.com/
 permalink: /:title
 highlighter: rouge
+
 plugins:
+    - jekyll-archives
     - jekyll-coffeescript
-    - jekyll-sitemap
     - jekyll-redirect-from
+    - jekyll-sitemap
+
+whitelist:
+  - jekyll-redirect-from
+
 sass:
     style: compressed
+
+jekyll-archives:
+  enabled:
+    - 'tags'
+  layout: tag-posts
+  permalinks:
+    tag: '/tags/:name/'
