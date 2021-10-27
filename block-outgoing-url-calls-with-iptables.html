@@ -1,0 +1,181 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+
+
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <title>How to block outgoing URL calls with iptables on Linux</title>
+    <meta name="description" content="Using iptables to block outgoing URL calls">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab">
+    <link rel="stylesheet" type="text/css" href="/assets/site.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121129645-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-121129645-1');
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function () {
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#edeff5",
+                    "text": "#838391"
+                },
+                "button": {
+                    "background": "#4b81e8"
+                }
+            },
+            "theme": "classic",
+            "position": "bottom-right"
+        })
+    });
+    </script>
+</head>
+
+
+<body>
+    <header class="container navbar">
+    <div class="logo">
+        <a href="/" title="Alex Budurovici - DevOps Engineer">
+            <img src="/assets/icons/128.png">
+        </a>
+    </div>
+
+    <nav class="navbar-list">
+        <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/about">About me</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/contact">Contact</a></li>
+    </nav>
+</header>
+
+
+    <div class="container">
+        <article class="column post">
+    
+    <section class="title">
+        <h1>How to block outgoing URL calls with iptables on Linux</h1>
+
+        <span class="info" datetime="2021-10-26">
+            Oct 26, 2021
+        </span>
+    </section>
+    
+
+    <section class="content">
+        <p><code class="language-plaintext highlighter-rouge">iptables</code> is a command-line firewall utility that uses policy chains to allow or block traffic. When a connection tries to establish itself on your system, iptables looks for a rule in its list to match it to. If it doesn’t find one, it resorts to the default action.</p>
+
+<p>For this in particular, you’ll need a kernel compiled with Netfilter <a href="https://unix.stackexchange.com/questions/404482/">“String match support”</a> enabled.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -A OUTPUT -p tcp -m string --string "/webnus.net/plugin-api/verify" --algo kmp -j REJECT --reject-with tcp-reset
+iptables -A OUTPUT -p tcp -m string --string "/webnus.net/addons-api/verify" --algo kmp -j REJECT --reject-with tcp-reset
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-A OUTPUT</code> Appends a rule targeting the outgoing calls</li>
+  <li><code class="language-plaintext highlighter-rouge">-p tcp</code> Use the <em>tcp</em> protocol for the rule to do its checks</li>
+  <li><code class="language-plaintext highlighter-rouge">-m string --string "PATTERN" --algo kmp</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-m string</code> Use the <em>match</em> module with the <em>string</em> selector</li>
+      <li><code class="language-plaintext highlighter-rouge">--string "PATTERN"</code> Match the given pattern.</li>
+      <li><code class="language-plaintext highlighter-rouge">--algo kmp</code> Use the <em>KMP</em> algorithm to do the string matching. Can read more about it here
+        <ul>
+          <li>https://stackoverflow.com/questions/16085201/when-would-you-use-kmp-over-boyer-moore</li>
+          <li>https://stackoverflow.com/questions/12656160/what-are-the-main-differences-between-the-knuth-morris-pratt-and-boyer-moore-sea</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">-j REJECT --reject-with tcp-reset</code> Connection reset: instead of dropping the packet with -j DROP, we can reject it and immediately close the connection with -p tcp -j REJECT –reject-with tcp-reset.</li>
+</ul>
+
+<p>Alternatively and for extra cookie points, you can always block all outgoing connections and whitelist
+only the ones are ok with you.</p>
+
+<p>Have a read <a href="https://askubuntu.com/questions/909984/how-to-fix-iptables-if-i-have-blocked-all-incoming-and-outgoing-connections">here</a> if you want to know more.</p>
+
+    </section>
+
+    <section class="tags">
+        <h2>Tags</h2>
+
+        <ul>
+        
+            <li>
+                <a href="/tags/linux">#linux</a>
+            </li>
+        
+            <li>
+                <a href="/tags/iptables">#iptables</a>
+            </li>
+        
+        </ul>
+    </section>
+
+    <section class="disqus">
+        <br /><hr /><br />
+        <div id="disqus_thread"></div>
+        <script>
+            (function () { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://w0rldart.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>
+            Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</article>
+    </div>
+
+    <footer class="container">
+    <hr>
+    <ul>
+        <li class="large">
+            <a href="https://github.com/w0rldart/w0rldart.com" class="btn" aria-label="Star w0rldart/w0rldart.com on GitHub">
+                <svg version="1.1" width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-mark-github" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+                <span>View on Github</span>
+            </a>
+        </li>
+    </ul>
+</footer>
+
+    <script>
+    // Call this function first
+    (function () {
+        handleLinks()
+    })()
+
+    function handleLinks () {
+        // Don't open our own site's links in new tabs
+        var host = location.hostname
+        // Grab and loop over all <a> elements
+        var allLinks = document.querySelectorAll('a')
+        for (var i = 0; i < allLinks.length; ++i) {
+            // if links are external and not empty
+            if (allLinks[i].hostname !== host && allLinks[i].hostname !== '') {
+            allLinks[i].target = '_blank'
+            }
+        }
+    }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+
+
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <title>How to fix slow WordPress admin!</title>
+    <meta name="description" content="Possible issues, improvements, and fixes to improve WordPress admin performance">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab">
+    <link rel="stylesheet" type="text/css" href="/assets/site.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121129645-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-121129645-1');
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function () {
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#edeff5",
+                    "text": "#838391"
+                },
+                "button": {
+                    "background": "#4b81e8"
+                }
+            },
+            "theme": "classic",
+            "position": "bottom-right"
+        })
+    });
+    </script>
+</head>
+
+
+<body>
+    <header class="container navbar">
+    <div class="logo">
+        <a href="/" title="Alex Budurovici - DevOps Engineer">
+            <img src="/assets/icons/128.png">
+        </a>
+    </div>
+
+    <nav class="navbar-list">
+        <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/about">About me</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/contact">Contact</a></li>
+    </nav>
+</header>
+
+
+    <div class="container">
+        <article class="column post">
+    
+    <section class="title">
+        <h1>How to fix slow WordPress admin!</h1>
+
+        <span class="info" datetime="2020-09-28">
+            Sep 28, 2020
+        </span>
+    </section>
+    
+
+    <section class="content">
+        <p>One unusual causing factor that is rarely considered or even caught, are the 
+<em>inefficient</em>/<em>unnecessary</em> <strong>API calls from within the installed and active plugins.</strong></p>
+
+<p><strong>Note:</strong> If you need support on these types of matters, don’t hesitate to <a href="/contact">contact me</a>.</p>
+
+<p>But before we look into that, let’s have a look at a brief list of potential improvements.</p>
+
+<h2 id="other-wordpress-fixes-and-improvements">Other WordPress fixes and improvements</h2>
+<p>These will have a direct correlation to security and performance improvements</p>
+
+<ul>
+  <li><strong>Cut down the use of active plugins</strong>
+    <ul>
+      <li>Remove the plugins that sit there and accumulate dust, getting usage once a year.
+  They’ll be available on the Plugins directory when you need them again.</li>
+      <li>Fewer plugins mean fewer things to process, potential conflicts, and performance hoggers.</li>
+    </ul>
+  </li>
+  <li><strong>Update LAMP/LEMP server</strong> <em>(if you have control/access to the server hosting your site)</em>
+    <ul>
+      <li>First, take a snapshot of the server for backup purposes.</li>
+      <li>Then have a look at the available packages to update. <code class="language-plaintext highlighter-rouge">yum update</code>, and <code class="language-plaintext highlighter-rouge">apt update &amp;&amp; apt upgrade</code> are the usual commands</li>
+      <li>The main targets are PHP, Apache/Nginx, and MySQL/MariaDB, but don’t omit other packages if they come up</li>
+      <li>Update your packages gradually (i.e: security patches first, then libraries, then services, etc.)</li>
+    </ul>
+  </li>
+  <li><strong>Upgrade to PHP7</strong>
+    <ul>
+      <li>This in case you’re still running on the old and discontinued version PHP 5.x</li>
+    </ul>
+  </li>
+  <li><strong>Run your DB server elsewhere</strong>
+    <ul>
+      <li>Databases are memory intensive and can pose possible security, performance and service availability problem.</li>
+      <li>My solution is to use a managed DB service, to remove management overhead, and have
+  easy access to enabling high availability.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="inefficiency-of-plugins">Inefficiency of plugins</h2>
+<p>Now, for the less obvious culprit… badly written plugins, hogging resources.</p>
+
+<p>It happens that you need a plugin to provide certain functionality, but few WordPress plugins (unfortunately)
+are designed efficiently and well built.</p>
+
+<p>What’s more frustrating though, is when you reach out to the developer to explain the issue and show where it happens,
+only to get a <em>“It works well for me”</em> kind of reply.</p>
+
+<p>In my case, this issue came up whilst using the <em>Modern Events Calendar (MEC)</em> by Webnus.
+With and thanks to the <a href="https://querymonitor.com/">Query Monitor</a>, I saw that the plugin accounted for:</p>
+<ul>
+  <li>the horribly slow loading of certain parts of the WordPress admin panel</li>
+  <li>28 out of 31 HTTP calls (over 90%)</li>
+  <li>an average of 16s extra of loading time (over 95% out of all the loading time)</li>
+</ul>
+
+<p><img src="/assets/images/mec-inefficiency.png" alt="MEC HTTP Calls" title="MEC HTTP Calls" /></p>
+
+<h3 id="solution">Solution</h3>
+
+<p>Whilst the plugin could optimize their calls, and perhaps do it different rather than on every call and successively for every add-on</p>
+
+<p>Since I already paid for the PRO version and verified the license, I figured out that I can block the calls to the following endpoints:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">http://webnus.biz/webnus.net/plugin-api/verify</code></li>
+  <li><code class="language-plaintext highlighter-rouge">http://webnus.biz/webnus.net/addons-api/verify</code></li>
+</ul>
+
+<p>Have a look at my article on how to <a href="/block-outgoing-url-calls-with-iptables">block outgoing URL calls with iptables</a> to see how I fixed this issue cause by the plugin</p>
+
+    </section>
+
+    <section class="tags">
+        <h2>Tags</h2>
+
+        <ul>
+        
+            <li>
+                <a href="/tags/wordpress">#wordpress</a>
+            </li>
+        
+            <li>
+                <a href="/tags/performance">#performance</a>
+            </li>
+        
+        </ul>
+    </section>
+
+    <section class="disqus">
+        <br /><hr /><br />
+        <div id="disqus_thread"></div>
+        <script>
+            (function () { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://w0rldart.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>
+            Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</article>
+    </div>
+
+    <footer class="container">
+    <hr>
+    <ul>
+        <li class="large">
+            <a href="https://github.com/w0rldart/w0rldart.com" class="btn" aria-label="Star w0rldart/w0rldart.com on GitHub">
+                <svg version="1.1" width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-mark-github" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+                <span>View on Github</span>
+            </a>
+        </li>
+    </ul>
+</footer>
+
+    <script>
+    // Call this function first
+    (function () {
+        handleLinks()
+    })()
+
+    function handleLinks () {
+        // Don't open our own site's links in new tabs
+        var host = location.hostname
+        // Grab and loop over all <a> elements
+        var allLinks = document.querySelectorAll('a')
+        for (var i = 0; i < allLinks.length; ++i) {
+            // if links are external and not empty
+            if (allLinks[i].hostname !== host && allLinks[i].hostname !== '') {
+            allLinks[i].target = '_blank'
+            }
+        }
+    }
+</script>
+
+</body>
+
+</html>

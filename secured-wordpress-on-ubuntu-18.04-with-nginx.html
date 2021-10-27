@@ -1,0 +1,566 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+
+
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Secured WordPress on LEMP Ubuntu 18.04 with Let's Encrypt</title>
+    <meta name="description" content="WordPress is the most popular CMS on the internet. This article is a starting point to an adecuquate LEMP (Linux, Nginx, MySQL, and PHP) stack configuration on Ubuntu 18.04 , with Let's Encrypt to generate the SSL certificate.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab">
+    <link rel="stylesheet" type="text/css" href="/assets/site.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121129645-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-121129645-1');
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function () {
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#edeff5",
+                    "text": "#838391"
+                },
+                "button": {
+                    "background": "#4b81e8"
+                }
+            },
+            "theme": "classic",
+            "position": "bottom-right"
+        })
+    });
+    </script>
+</head>
+
+
+<body>
+    <header class="container navbar">
+    <div class="logo">
+        <a href="/" title="Alex Budurovici - DevOps Engineer">
+            <img src="/assets/icons/128.png">
+        </a>
+    </div>
+
+    <nav class="navbar-list">
+        <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/about">About me</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/contact">Contact</a></li>
+    </nav>
+</header>
+
+
+    <div class="container">
+        <article class="column post">
+    
+    <section class="title">
+        <h1>Secured WordPress on LEMP Ubuntu 18.04 with Let's Encrypt</h1>
+
+        <span class="info" datetime="2019-08-23">
+            Aug 23, 2019
+        </span>
+    </section>
+    
+
+    <section class="content">
+        <p>This tutorial will teach you how to setup <a href="https://wordpress.org/">WordPress</a> on your <a href="http://releases.ubuntu.com/18.04/">Ubuntu 18.04</a> server with a LEMP stack.</p>
+
+<h2 id="index">Index</h2>
+
+<ul>
+  <li><a href="#wordpress-on-lemp-with-lets-encrypt">WordPress on LEMP with Let’s Encrypt</a>
+    <ul>
+      <li><a href="#what-is-lemp">What is LEMP</a></li>
+      <li><a href="#what-is-lets-encrypt">What is Let’s Encrypt?</a></li>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+    </ul>
+  </li>
+  <li><a href="#installation-steps">Installation steps</a>
+    <ul>
+      <li><a href="#step-1-create-a-sudo-user">Step 1: Create a sudo user</a></li>
+      <li><a href="#step-2-setup-the-firewall">Step 2: Setup the firewall</a></li>
+      <li><a href="#step-3-install-nginx-web-werver">Step 3: Install Nginx web server</a></li>
+      <li><a href="#step-4-install-mysql-database-server">Step 4: Install MySQL database server</a></li>
+      <li><a href="#step-5-install-php">Step 5: Install PHP</a></li>
+      <li><a href="#step-6-configure-nginx-to-serve-php">Step 6: Configure Nginx to serve PHP</a></li>
+      <li><a href="#step-7-download-and-configure-wordpress">Step 7: Download and configure WordPress</a></li>
+      <li><a href="#step-8-obtain-and-configure-the-ssl-certificate-with-lets-encrypt">Step 8: Obtain and configure the SSL Certificate with Let’s Encrypt</a></li>
+      <li><a href="#step-9-finalize-the-wordpress-installation">Step 9: Finalize the WordPress installation</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="wordpress-on-lemp-with-lets-encrypt">WordPress on LEMP with Let’s Encrypt</h2>
+
+<h3 id="what-is-lemp">What is LEMP?</h3>
+
+<p>This is an acronym that describes a <a href="https://en.wikipedia.org/wiki/Linux">Linux</a> operating system, with an Nginx (pronounced like “Engine-X”) web server,
+a MySQL / MariaDB database server and the dynamic processing is handled by PHP.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Linux"><strong>L</strong>inux</a> <a href="https://nginx.org/"><strong>E</strong>ngine-X</a> <a href="https://www.mysql.com/"><strong>M</strong>ySQL</a> <a href="https://www.php.net/"><strong>P</strong>HP</a></p>
+
+<h3 id="what-is-lets-encrypt">What is Let’s Encrypt?</h3>
+
+<p><a href="http://letsencrypt.com">Let’s Encrypt</a> is a Certificate Authority (CA) that provides an easy way to obtain and install free TLS/SSL certificates,
+thereby enabling encrypted HTTPS on web servers. It simplifies the process by providing a software client, <a href="https://certbot.eff.org/">Certbot</a>,
+that attempts to automate most (if not all) of the required steps.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<ul>
+  <li>A server (I run my servers on <a href="https://m.do.co/c/b3ef1a9e67b9">DigitalOcean</a> <em>*</em>)</li>
+  <li>Ubuntu 18.04 installed</li>
+  <li>SSH access</li>
+</ul>
+
+<p><em>* Signing up to DigitalOcean via that link, you receive a $50, 30-day credit as soon as you add a valid payment method to your account.</em></p>
+
+<h2 id="installation-steps">Installation steps</h2>
+
+<h3 id="step-1-create-a-sudo-user">Step 1: Create a <code class="language-plaintext highlighter-rouge">sudo</code> user</h3>
+
+<p>Since we will be completing the steps in this guide using a non-root user with sudo privileges, we need to create a user for that.</p>
+
+<p><strong><em>Skip this step if you already have it</em></strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Login as root</span>
+<span class="nv">$ </span>ssh root@your_server_ip
+
+<span class="c"># Create a new user</span>
+<span class="nv">$ </span>adduser santa
+
+<span class="c"># Setup root privileges</span>
+<span class="nv">$ </span>usermod <span class="nt">-aG</span> <span class="nb">sudo </span>santa
+</code></pre></div></div>
+
+<p><strong>Highly recommended to setup SSH Public Key authentication</strong> and disabling password login.
+You can find out on how to do so on this <a href="https://linuxize.com/post/how-to-set-up-ssh-keys-on-ubuntu-1804/">Linuxize article</a></p>
+
+<p>Before you log out from your root session, you should test your new user login in a new terminal, on your <em>local machine</em></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Login</span>
+<span class="nv">$ </span>ssh santa@your_server_ip
+
+<span class="c"># Test sudo abilities</span>
+<span class="nv">$ </span><span class="nb">sudo </span>ufw app list
+</code></pre></div></div>
+
+<h3 id="step-2-setup-the-firewall">Step 2: Setup the firewall</h3>
+
+<p>Ubuntu 18.04 servers comes by default with the UFW firewall, and can be setup to make sure only certain connections are allowed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Allow access on SSH port</span>
+<span class="nv">$ </span><span class="nb">sudo </span>ufw allow 22
+
+<span class="c"># Allow access on HTTPS port</span>
+<span class="nv">$ </span><span class="nb">sudo </span>ufw allow 443
+
+<span class="c"># Enable the firewall</span>
+<span class="nv">$ </span><span class="nb">sudo </span>ufw <span class="nb">enable</span>
+
+<span class="c"># Check firewall status</span>
+<span class="nv">$ </span><span class="nb">sudo </span>ufw status
+</code></pre></div></div>
+
+<h3 id="step-3-install-nginx-web-werver">Step 3: Install Nginx web werver</h3>
+
+<p>Installing Nginx is pretty straight forward:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Nginx</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>nginx
+</code></pre></div></div>
+
+<p>Then just open a new browser tab, enter your server IP Address and you should see a <code class="language-plaintext highlighter-rouge">Welcom to nginx!</code> message.</p>
+
+<h3 id="step-4-install-mysql-database-server">Step 4: Install MySQL database server</h3>
+
+<p>Here we’re going to use MySQL, but alternatively you could also use MariaDB. More about it on this <a href="https://linuxize.com/post/how-to-install-mariadb-on-ubuntu-18-04/">Linuxize article</a></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install MySQL</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>mysql-server
+
+<span class="c"># Configure the Installation</span>
+<span class="nv">$ </span>mysql_secure_installation
+</code></pre></div></div>
+
+<p>You’ll be prompted to answer some questions. We recommend you answer as follows:</p>
+
+<p>NOTE: Make sure you remember your MySQL password, as you’ll be using it later on.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter current password for root (enter for none): Just press the Enter
+Set root password? [Y/n]: Y
+New password: Enter password
+Re-enter new password: Repeat password
+Remove anonymous users? [Y/n]: Y
+Disallow root login remotely? [Y/n]: Y
+Remove test database and access to it? [Y/n]: Y
+Reload privilege tables now? [Y/n]: Y
+</code></pre></div></div>
+<p>Next, create the database, user and password for Wordpress.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Login to your database server</span>
+<span class="nv">$ </span>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+
+<span class="c"># Create a new database for WordPress</span>
+mysql&gt; CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci<span class="p">;</span>
+
+<span class="c"># Create a separate MySQL user account that we will use exclusively to operate on our new database</span>
+<span class="c"># wordpressuser and password are the credentials, but you should swap for your custom ones</span>
+mysql&gt; GRANT ALL ON wordpress.<span class="k">*</span> TO <span class="s1">'wordpressuser'</span>@<span class="s1">'localhost'</span> IDENTIFIED BY <span class="s1">'password'</span><span class="p">;</span>
+
+<span class="c"># Flush the privileges so that the current instance of MySQL knows about the recent changes we’ve made</span>
+mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
+
+<span class="c"># Exit out of MySQL console</span>
+mysql&gt; EXIT<span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="step-5-install-php">Step 5: Install PHP</h3>
+<p>In this step we’ll install the PHP extensions required for WordPress to run and for Nginx to process PHP (<code class="language-plaintext highlighter-rouge">php-fpm</code>).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install PHP packages</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>php-fpm php-mysql php-curl php-gd php-mbstring php-mcrypt php-xml php-xmlrpc php-intl php-zip
+
+<span class="c"># Find out which PHP 7 version you have</span>
+<span class="nv">$ </span>php <span class="nt">-v</span> | <span class="nb">head</span> <span class="nt">-1</span>
+</code></pre></div></div>
+
+<p>We need to know which PHP 7 version, because next step is to configure the PHP Processor.
+Replace 7.2 with your version… i.e.: 7.0</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Open the main php-fpm pool configuration file</span>
+<span class="nv">$ </span><span class="nb">sudo </span>nano /etc/php/7.2/fpm/pool.d/www.conf
+</code></pre></div></div>
+
+<p>In there you are to add or uncomment the line that contains the following: <code class="language-plaintext highlighter-rouge">security.limit_extensions</code>
+ending up with the following value: <code class="language-plaintext highlighter-rouge">security.limit_extensions = .php</code></p>
+
+<p>You can find more about the above, on this <a href="https://serverfault.com/questions/627903/is-the-php-option-cgi-fix-pathinfo-really-dangerous-with-nginx-php-fpm#701500">Server Fault thread</a></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Configure the PHP processor</span>
+<span class="nv">$ </span><span class="nb">sudo </span>nano /etc/php/7.2/fpm/php.ini
+</code></pre></div></div>
+
+<p>And adjust the following values:</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>memory_limit = 256M
+upload_max_filesize = 10M
+cgi.fix_pathinfo = 0
+max_execution_time = 360
+date.timezone = Europe/Berlin
+</code></pre></div></div>
+
+<p>And finally</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Restart PHP</span>
+<span class="nv">$ </span>service php7.2-fpm restart
+</code></pre></div></div>
+
+<h3 id="step-6-configure-nginx-to-serve-php">Step 6: Configure Nginx to serve PHP</h3>
+<p>We need a few minor adjustments to our Nginx server block files to be able to serve PHP / WordPress.</p>
+
+<p><strong>Replace <code class="language-plaintext highlighter-rouge">your_domain.com</code> with your actual domain.</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a few directories required for Nginx configuration</span>
+<span class="nv">$ </span><span class="nb">sudo mkdir</span> /etc/nginx/sites-available <span class="o">&amp;&amp;</span> <span class="nb">sudo mkdir</span> /etc/nginx/sites-enabled
+
+<span class="c"># Create your virtual host</span>
+<span class="nv">$ </span><span class="nb">sudo </span>nano /etc/nginx/sites-available/your_domain.com
+</code></pre></div></div>
+
+<p>This set of instructions will tell Nginx to listen for requests to <code class="language-plaintext highlighter-rouge">your_domain.com</code>
+and server your WordPress site.</p>
+
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="mi">80</span> <span class="s">default_server</span><span class="p">;</span>
+    <span class="kn">listen</span> <span class="s">[::]:80</span> <span class="s">default_server</span> <span class="s">ipv6only=on</span><span class="p">;</span>
+
+    <span class="kn">root</span> <span class="n">/var/www/html</span><span class="p">;</span>
+    <span class="kn">index</span> <span class="s">index.php</span> <span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
+
+    <span class="kn">server_name</span> <span class="s">your_domain.com</span><span class="p">;</span>
+
+    <span class="kn">client_max_body_size</span> <span class="mi">10M</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
+        <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri</span><span class="n">/</span> <span class="n">/index.php?</span><span class="nv">$args</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="p">~</span> <span class="sr">\.php$</span> <span class="p">{</span>
+        <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span>
+
+        <span class="kn">fastcgi_split_path_info</span> <span class="s">^(.+</span><span class="err">\</span><span class="s">.php)(/.+)</span>$<span class="p">;</span>
+        <span class="kn">fastcgi_pass</span> <span class="s">unix:/var/run/php/php7.2-fpm.sock</span><span class="p">;</span>
+        <span class="kn">fastcgi_index</span> <span class="s">index.php</span><span class="p">;</span>
+        <span class="kn">include</span> <span class="n">/etc/nginx/snippets/fastcgi_params</span><span class="p">;</span>
+        <span class="kn">fastcgi_param</span> <span class="s">SCRIPT_FILENAME</span> <span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Disable logging for these static requests and will mark them as</span>
+    <span class="c1"># highly cacheable since these are typically expensive resources to serve</span>
+    <span class="kn">location</span> <span class="p">=</span> <span class="n">/favicon.ico</span> <span class="p">{</span> <span class="kn">log_not_found</span> <span class="no">off</span><span class="p">;</span> <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kn">location</span> <span class="p">=</span> <span class="n">/robots.txt</span> <span class="p">{</span> <span class="kn">log_not_found</span> <span class="no">off</span><span class="p">;</span> <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span> <span class="kn">allow</span> <span class="s">all</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kn">location</span> <span class="p">~</span><span class="sr">*</span> <span class="err">\</span><span class="s">.(css|gif|ico|jpeg|jpg|js|png)</span>$ <span class="p">{</span>
+        <span class="kn">expires</span> <span class="s">max</span><span class="p">;</span>
+        <span class="kn">log_not_found</span> <span class="no">off</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># SECURITY : Deny all attempts to access PHP Files in the uploads directory</span>
+    <span class="kn">location</span> <span class="p">~</span><span class="sr">*</span> <span class="n">/</span><span class="s">(?:uploads|files)/.*</span><span class="err">\</span><span class="s">.php</span>$ <span class="p">{</span>
+        <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Deny access to .ht* files</span>
+    <span class="kn">location</span> <span class="p">~</span> <span class="sr">/\.ht</span> <span class="p">{</span>
+        <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Last thing remaining is to enable the site and restart Nginx</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a simlink to enable your virtual host</span>
+<span class="nv">$ </span><span class="nb">sudo ln</span> <span class="nt">-s</span> /etc/nginx/sites-available/your_domain.com /etc/nginx/sites-enabled/your_domain.com
+
+<span class="c"># Restart nginx server</span>
+<span class="nv">$ </span><span class="nb">sudo </span>service nginx restart
+</code></pre></div></div>
+
+<h3 id="step-7-download-and-configure-wordpress">Step 7: Download and configure WordPress</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Download latest WordPress version</span>
+<span class="nv">$ </span><span class="nb">cd</span> /tmp <span class="o">&amp;&amp;</span> wget https://wordpress.org/latest.tar.gz
+
+<span class="c"># Unpack it</span>
+<span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-zxvf</span> latest.tar.gz
+
+<span class="c"># Move it from tmp to /var/www</span>
+<span class="nv">$ </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/www/html <span class="o">&amp;&amp;</span> <span class="nb">sudo mv </span>wordpress /var/www/html
+
+<span class="c"># Generate WordPress secrets (Copy them somewhere)</span>
+<span class="nv">$ </span>curl <span class="nt">-s</span> https://api.wordpress.org/secret-key/1.1/salt/
+
+<span class="c"># Edit WordPress configuration</span>
+<span class="nv">$ </span><span class="nb">sudo mv</span> /var/www/html/wp-config-sample.php /var/www/html/wp-config.php <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>nano /var/www/html/wp-config.php
+</code></pre></div></div>
+
+<p>These are WordPress configuration parameters that you need to adjust
+in order to establish a connection between your application and the database.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ** MySQL settings - You can get this info from your web host ** //</span>
+<span class="cd">/** The name of the database for WordPress */</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'DB_NAME'</span><span class="p">,</span> <span class="s1">'wordpress'</span><span class="p">);</span>
+
+<span class="cd">/** MySQL database username */</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'DB_USER'</span><span class="p">,</span> <span class="s1">'wordpressuser'</span><span class="p">);</span>
+
+<span class="cd">/** MySQL database password */</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'DB_PASSWORD'</span><span class="p">,</span> <span class="s1">'password'</span><span class="p">);</span>
+
+<span class="cd">/** MySQL hostname */</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'DB_HOST'</span><span class="p">,</span> <span class="s1">'localhost'</span><span class="p">);</span>
+
+<span class="cd">/** Database Charset to use in creating database tables. */</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'DB_CHARSET'</span><span class="p">,</span> <span class="s1">'utf8'</span><span class="p">);</span>
+
+<span class="cd">/** The Database Collate type. Don't change this if in doubt. */</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'DB_COLLATE'</span><span class="p">,</span> <span class="s1">''</span><span class="p">);</span>
+
+<span class="cd">/**
+ * Authentication Unique Keys and Salts.
+ *
+ * Change these to different unique phrases!
+ * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
+ * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
+ *
+ * @since 2.6.0
+ */</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'AUTH_KEY'</span><span class="p">,</span>         <span class="s1">'put your unique phrase here'</span><span class="p">);</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'SECURE_AUTH_KEY'</span><span class="p">,</span>  <span class="s1">'put your unique phrase here'</span><span class="p">);</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'LOGGED_IN_KEY'</span><span class="p">,</span>    <span class="s1">'put your unique phrase here'</span><span class="p">);</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'NONCE_KEY'</span><span class="p">,</span>        <span class="s1">'put your unique phrase here'</span><span class="p">);</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'AUTH_SALT'</span><span class="p">,</span>        <span class="s1">'put your unique phrase here'</span><span class="p">);</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'SECURE_AUTH_SALT'</span><span class="p">,</span> <span class="s1">'put your unique phrase here'</span><span class="p">);</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'LOGGED_IN_SALT'</span><span class="p">,</span>   <span class="s1">'put your unique phrase here'</span><span class="p">);</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'NONCE_SALT'</span><span class="p">,</span>       <span class="s1">'put your unique phrase here'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Finally, set the permissions right</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo chown</span> <span class="nt">-R</span> www-data:www-data /var/www/html/ <span class="o">&amp;&amp;</span> <span class="nb">sudo chmod</span> <span class="nt">-R</span> 755 /var/www/html/
+</code></pre></div></div>
+
+<h3 id="step-8-obtain-and-configure-the-ssl-certificate-with-lets-encrypt">Step 8: Obtain and configure the SSL Certificate with Let’s Encrypt</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># First, add the Certbot repository</span>
+<span class="nv">$ </span><span class="nb">sudo </span>add-apt-repository ppa:certbot/certbot
+
+<span class="c"># Install Certbot and Certbot Nginx plugin</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>python-certbot-nginx
+
+<span class="c"># Obtain your free Let’s Encrypt SSL/TLS certificate</span>
+<span class="nv">$ </span><span class="nb">sudo </span>certbot <span class="nt">--nginx</span> <span class="nt">-m</span> your@email.com <span class="nt">-d</span> your_domain.com
+</code></pre></div></div>
+
+<p>Follow the configuration steps followed by the command above and
+when it comes to <code class="language-plaintext highlighter-rouge">Choose whether or not to redirect HTTP traffic to HTTPS, removing HTTP access.</code>
+choose <code class="language-plaintext highlighter-rouge">2</code></p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Please choose whether or not to redirect HTTP traffic to HTTPS, removing HTTP access.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+1: No redirect - Make no further changes to the webserver configuration.
+2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
+new sites, or if you're confident your site works on HTTPS. You can undo this
+change by editing your web server's configuration.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Select the appropriate number [1-2] then [enter] (press 'c' to cancel): 2
+</code></pre></div></div>
+
+<p>After that, Let’s Encrypt Client has installed your certificate and configured your website to redirect all traffic to HTTPS.</p>
+
+<p>If you check your site’s Nginx configuration file, <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/your_domain.com</code>, you’ll notice
+that some modifications have been made by the Let’s Encrypt client.</p>
+
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">.</span> <span class="s">.</span> <span class="s">.</span>
+
+    <span class="s">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span> <span class="c1"># managed by Certbot</span>
+    <span class="k">ssl_certificate</span> <span class="n">/etc/letsencrypt/live/your_domain.com/fullchain.pem</span><span class="p">;</span> <span class="c1"># managed by Certbot</span>
+    <span class="k">ssl_certificate_key</span> <span class="n">/etc/letsencrypt/live/your_domain.com/privkey.pem</span><span class="p">;</span> <span class="c1"># managed by Certbot</span>
+    <span class="k">include</span> <span class="n">/etc/letsencrypt/options-ssl-nginx.conf</span>; <span class="c1"># managed by Certbot</span>
+    <span class="k">ssl_dhparam</span> <span class="n">/etc/letsencrypt/ssl-dhparams.pem</span><span class="p">;</span> <span class="c1"># managed by Certbot</span>
+
+<span class="err">}</span>
+
+<span class="k">server</span> <span class="p">{</span>
+    <span class="kn">if</span> <span class="s">(</span><span class="nv">$host</span> <span class="p">=</span> <span class="s">your_domain.com)</span> <span class="p">{</span>
+        <span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$host$request_uri</span><span class="p">;</span>
+    <span class="p">}</span> <span class="c1"># managed by Certbot</span>
+
+
+    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">your_domain.com</span><span class="p">;</span>
+    <span class="kn">return</span> <span class="mi">404</span><span class="p">;</span> <span class="c1"># managed by Certbot</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Your WordPress site is now ready to be used over HTTPS.</p>
+
+<h2 id="step-9-finalize-the-wordpress-installation">Step 9: Finalize the WordPress Installation</h2>
+
+<p>The final step is to complete the WordPress installation through the web interface.
+To do this, just navigate in your browser to your domain (<code class="language-plaintext highlighter-rouge">https://your_domain.com</code>),
+and you’ll be guided through the easy process of installing WordPress.</p>
+
+
+    </section>
+
+    <section class="tags">
+        <h2>Tags</h2>
+
+        <ul>
+        
+            <li>
+                <a href="/tags/nginx">#nginx</a>
+            </li>
+        
+            <li>
+                <a href="/tags/wordpress">#wordpress</a>
+            </li>
+        
+            <li>
+                <a href="/tags/ssl">#ssl</a>
+            </li>
+        
+            <li>
+                <a href="/tags/ubuntu">#ubuntu</a>
+            </li>
+        
+            <li>
+                <a href="/tags/php">#php</a>
+            </li>
+        
+            <li>
+                <a href="/tags/lemp">#lemp</a>
+            </li>
+        
+            <li>
+                <a href="/tags/linux">#linux</a>
+            </li>
+        
+            <li>
+                <a href="/tags/mysql">#mysql</a>
+            </li>
+        
+            <li>
+                <a href="/tags/mariadb">#mariadb</a>
+            </li>
+        
+        </ul>
+    </section>
+
+    <section class="disqus">
+        <br /><hr /><br />
+        <div id="disqus_thread"></div>
+        <script>
+            (function () { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://w0rldart.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>
+            Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</article>
+    </div>
+
+    <footer class="container">
+    <hr>
+    <ul>
+        <li class="large">
+            <a href="https://github.com/w0rldart/w0rldart.com" class="btn" aria-label="Star w0rldart/w0rldart.com on GitHub">
+                <svg version="1.1" width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-mark-github" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+                <span>View on Github</span>
+            </a>
+        </li>
+    </ul>
+</footer>
+
+    <script>
+    // Call this function first
+    (function () {
+        handleLinks()
+    })()
+
+    function handleLinks () {
+        // Don't open our own site's links in new tabs
+        var host = location.hostname
+        // Grab and loop over all <a> elements
+        var allLinks = document.querySelectorAll('a')
+        for (var i = 0; i < allLinks.length; ++i) {
+            // if links are external and not empty
+            if (allLinks[i].hostname !== host && allLinks[i].hostname !== '') {
+            allLinks[i].target = '_blank'
+            }
+        }
+    }
+</script>
+
+</body>
+
+</html>

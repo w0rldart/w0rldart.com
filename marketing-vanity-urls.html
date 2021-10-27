@@ -1,0 +1,205 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+
+
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Marketing vanity URLs</title>
+    <meta name="description" content="Zurich based multi-cloud specialist: AWS, Google, Azure and Alibaba. Cloud development, Software Engineering and DevOps solutions.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab">
+    <link rel="stylesheet" type="text/css" href="/assets/site.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121129645-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-121129645-1');
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function () {
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#edeff5",
+                    "text": "#838391"
+                },
+                "button": {
+                    "background": "#4b81e8"
+                }
+            },
+            "theme": "classic",
+            "position": "bottom-right"
+        })
+    });
+    </script>
+</head>
+
+
+<body>
+    <header class="container navbar">
+    <div class="logo">
+        <a href="/" title="Alex Budurovici - DevOps Engineer">
+            <img src="/assets/icons/128.png">
+        </a>
+    </div>
+
+    <nav class="navbar-list">
+        <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/about">About me</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/contact">Contact</a></li>
+    </nav>
+</header>
+
+
+    <div class="container">
+        <article class="column post">
+    
+    <section class="title">
+        <h1>Marketing vanity URLs</h1>
+
+        <span class="info" datetime="2015-06-19">
+            Jun 19, 2015
+        </span>
+    </section>
+    
+
+    <section class="content">
+        <p>Vanity URLs are simple but incredibly efficient redirects to help track marketing campaigns via Google Analytics, in this case, and help build reports or track their effectiveness.</p>
+
+<p>This is a small walk-through on:</p>
+
+<ul>
+  <li>How to track traffic to websites from printed leaflets and posters</li>
+  <li>How to use Google Analytics to asses printed marketing campaigns</li>
+  <li>How to create vanity urls</li>
+  <li>How to check ROI (Return on investment) for printed adverts</li>
+</ul>
+
+<h2 id="requirements">Requirements</h2>
+
+<ul>
+  <li>Domain(s) that you want to use</li>
+  <li>Server with Apache (or any other web server)
+    <ul>
+      <li>I run my servers on <a href="https://m.do.co/c/d60d93080803">DigitalOcean</a> and <em>* Signing up to DigitalOcean via this link, you receive a $50, 30-day credit as soon as you add a valid payment method to your account.</em></li>
+    </ul>
+  </li>
+  <li>Manually register the virtual hosts for each domain you want to process, or via a tool like Plesk or cPanel (under parked domain section) if you have a managed server.</li>
+</ul>
+
+<h2 id="process">Process</h2>
+
+<p>Say that you plan to buy a vanity domain called <code class="language-plaintext highlighter-rouge">icecream2015.com</code> and it needs to redirect to <code class="language-plaintext highlighter-rouge">2015.icecream.com</code></p>
+
+<p>After pointing the domain’s dns to your server, and creating its vhost (in cPannel, you’d add it as a parked domain), you proceed to add the following
+<code class="language-plaintext highlighter-rouge">RewriteRule</code> that will redirect <code class="language-plaintext highlighter-rouge">www.icecream2015.com</code> and/or <code class="language-plaintext highlighter-rouge">icecream2015.com</code> to your live site, which in this case is <code class="language-plaintext highlighter-rouge">2015.icecream.com</code></p>
+
+<div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">RewriteCond</span> %{HTTP_HOST} ^(www\.)?icecream2015\.com$ [NC]
+<span class="nc">RewriteRule</span> ^/?$ "http\:\/\/2015\.icecream\.com" [R=301,L]
+</code></pre></div></div>
+
+<p>Now, in order to create vanity urls (i.e: <code class="language-plaintext highlighter-rouge">icecream2015.com/cornilla</code> which tracks an email campaign) you can use <a href="https://ga-dev-tools.appspot.com/campaign-url-builder/">Google’s URL Builder tool</a>
+to create our campaign URLS. For example, setting <code class="language-plaintext highlighter-rouge">icecream2015.com/cornilla</code> to redirect to <code class="language-plaintext highlighter-rouge">2015.icecream.com/catalog/cornetto/vanilla?utm_source=Cornetto&amp;utm_medium=email&amp;utm_campaign=vanilla_flavour</code></p>
+
+<p>Only thing remaining, is to write the rule:</p>
+
+<div class="language-apache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">RewriteCond</span> %{HTTP_HOST} ^(www\.)?icecream2015\.com$ [NC]
+<span class="nc">RewriteCond</span> %{THE_REQUEST} /tm
+<span class="nc">RewriteRule</span> . "http:\/\/2015\.icecream\.com\/cornetto\/vanilla?utm_source=Cornetto&amp;utm_medium=email&amp;utm_campaign=vanilla_flavour" [R=301,L]
+</code></pre></div></div>
+
+<p>And voila! When anybody goes to <code class="language-plaintext highlighter-rouge">www.icecream2015.com/cornilla</code> or <code class="language-plaintext highlighter-rouge">icecream2015.com/cornilla</code>, they would get redirected to <code class="language-plaintext highlighter-rouge">2015.icecream.com/catalog/cornetto/vanilla?utm_source=Cornetto&amp;utm_medium=email&amp;utm_campaign=vanilla_flavour</code></p>
+
+<p>Of course a Google Analytics campaign code is automatically connected to all of the goals you set up in GA, whether they are an item sale,
+event registration, form completion, etc - so you can track the effectiveness of your campaign (which now is via an easy-to-remember url).</p>
+
+<p>Remember though that not all people will add the ‘vanity’ part of the URL, so these campaigns will be indicative rather than perfect.</p>
+
+    </section>
+
+    <section class="tags">
+        <h2>Tags</h2>
+
+        <ul>
+        
+            <li>
+                <a href="/tags/marketing">#marketing</a>
+            </li>
+        
+            <li>
+                <a href="/tags/seo">#seo</a>
+            </li>
+        
+            <li>
+                <a href="/tags/apache">#apache</a>
+            </li>
+        
+        </ul>
+    </section>
+
+    <section class="disqus">
+        <br /><hr /><br />
+        <div id="disqus_thread"></div>
+        <script>
+            (function () { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://w0rldart.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>
+            Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</article>
+    </div>
+
+    <footer class="container">
+    <hr>
+    <ul>
+        <li class="large">
+            <a href="https://github.com/w0rldart/w0rldart.com" class="btn" aria-label="Star w0rldart/w0rldart.com on GitHub">
+                <svg version="1.1" width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-mark-github" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+                <span>View on Github</span>
+            </a>
+        </li>
+    </ul>
+</footer>
+
+    <script>
+    // Call this function first
+    (function () {
+        handleLinks()
+    })()
+
+    function handleLinks () {
+        // Don't open our own site's links in new tabs
+        var host = location.hostname
+        // Grab and loop over all <a> elements
+        var allLinks = document.querySelectorAll('a')
+        for (var i = 0; i < allLinks.length; ++i) {
+            // if links are external and not empty
+            if (allLinks[i].hostname !== host && allLinks[i].hostname !== '') {
+            allLinks[i].target = '_blank'
+            }
+        }
+    }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,182 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+
+
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <title>CSV UTF-8 encoding issues in Excel</title>
+    <meta name="description" content="Zurich based multi-cloud specialist: AWS, Google, Azure and Alibaba. Cloud development, Software Engineering and DevOps solutions.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab">
+    <link rel="stylesheet" type="text/css" href="/assets/site.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121129645-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-121129645-1');
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function () {
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#edeff5",
+                    "text": "#838391"
+                },
+                "button": {
+                    "background": "#4b81e8"
+                }
+            },
+            "theme": "classic",
+            "position": "bottom-right"
+        })
+    });
+    </script>
+</head>
+
+
+<body>
+    <header class="container navbar">
+    <div class="logo">
+        <a href="/" title="Alex Budurovici - DevOps Engineer">
+            <img src="/assets/icons/128.png">
+        </a>
+    </div>
+
+    <nav class="navbar-list">
+        <li class="navbar-item"><a class="navbar-link" href="/">Home</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/about">About me</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/contact">Contact</a></li>
+    </nav>
+</header>
+
+
+    <div class="container">
+        <article class="column post">
+    
+    <section class="title">
+        <h1>CSV UTF-8 encoding issues in Excel</h1>
+
+        <span class="info" datetime="2015-10-09">
+            Oct  9, 2015
+        </span>
+    </section>
+    
+
+    <section class="content">
+        <p>There’s a bug which causes some accented characters to become corrupt before / during / after import or just document edit, when you use Microsoft Excel – this is a known Microsoft bug which has never been fixed.
+This frustrating csv UTF-8 encoding issue, occurs only with Microsoft Excel.</p>
+
+<p>The solution is use either <a href="https://www.openoffice.org/download/index.html">OpenOffice</a> or Google Docs’ Spreadsheet, to load the document and force save as a CSV file with the right encoding.</p>
+
+<h2 id="step-by-step-for-openoffice">Step-by-step for OpenOffice</h2>
+
+<ol>
+  <li>
+    <p>Open your source data in Open Office (Spreadsheet), if it’s in CSV format (text, comma delimited) you will be prompted to select character encoding. <em>By default, it’s set to ‘Western European’</em>.
+Check the data in the preview window to see if accented characters look OK, if they do… jump to step <strong>3.</strong></p>
+  </li>
+  <li>
+    <p>If the characters do look corrupted (unexpected capitals or weird symbols in place of lower case accented characters, etc) you will need to change the character encoding. This will usually just be a change to UTF-8 (not UTF-7) – but check the accented characters!</p>
+  </li>
+  <li>
+    <p>Click OK and import the data, it should open and look like a normal spreadsheet.</p>
+  </li>
+  <li>
+    <p>Now proceed to save it in a correctly encoded format by choosing to <strong>Save As</strong> (Ctrl + Shift + S) and choosing <em>Text CSV (.csv)</em> from the <em>formats</em> drop down, just above the save button, and sticking to <em>“Use Text CSV Format”</em> in the following prompt box.</p>
+  </li>
+  <li>
+    <p>Done!</p>
+  </li>
+</ol>
+
+<p>This csv UTF-8 encoding issue seems to be fairly common where data imports / exports are prevalent between SaaS systems from different suppliers.</p>
+
+    </section>
+
+    <section class="tags">
+        <h2>Tags</h2>
+
+        <ul>
+        
+            <li>
+                <a href="/tags/encoding">#encoding</a>
+            </li>
+        
+            <li>
+                <a href="/tags/csv">#csv</a>
+            </li>
+        
+            <li>
+                <a href="/tags/hacks">#hacks</a>
+            </li>
+        
+        </ul>
+    </section>
+
+    <section class="disqus">
+        <br /><hr /><br />
+        <div id="disqus_thread"></div>
+        <script>
+            (function () { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://w0rldart.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>
+            Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </section>
+</article>
+    </div>
+
+    <footer class="container">
+    <hr>
+    <ul>
+        <li class="large">
+            <a href="https://github.com/w0rldart/w0rldart.com" class="btn" aria-label="Star w0rldart/w0rldart.com on GitHub">
+                <svg version="1.1" width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-mark-github" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+                <span>View on Github</span>
+            </a>
+        </li>
+    </ul>
+</footer>
+
+    <script>
+    // Call this function first
+    (function () {
+        handleLinks()
+    })()
+
+    function handleLinks () {
+        // Don't open our own site's links in new tabs
+        var host = location.hostname
+        // Grab and loop over all <a> elements
+        var allLinks = document.querySelectorAll('a')
+        for (var i = 0; i < allLinks.length; ++i) {
+            // if links are external and not empty
+            if (allLinks[i].hostname !== host && allLinks[i].hostname !== '') {
+            allLinks[i].target = '_blank'
+            }
+        }
+    }
+</script>
+
+</body>
+
+</html>
