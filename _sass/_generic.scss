@@ -18,7 +18,8 @@ a {
     text-rendering : optimizeLegibility;
     text-rendering : geometricPrecision;
 
-    color: #039be5;
+    color: $base_color;
+    font-weight: bolder;
 }
 
 /*
