@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "_posts/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.5
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - run: bundle exec jekyll build
+  deploy:
+    needs: build
+    steps:
+      - run: touch ./_site/.nojekyll
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _site
+
+# deploy:
+#   provider: pages
+#   skip-cleanup: true
+#   keep-history: true
+#   on:
+#     branch: master
+#   github-token: $GITHUB_TOKEN
+#   local-dir: _site
+#   committer-from-gh: true
