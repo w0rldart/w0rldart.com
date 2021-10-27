@@ -19,11 +19,6 @@ jobs:
       - run: ls -la
       - run: ls -la ./_site
       - run: touch ./_site/.nojekyll
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
