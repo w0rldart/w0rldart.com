@@ -16,8 +16,9 @@ jobs:
           ruby-version: 2.5
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - run: bundle exec jekyll build
-      - run: |
-          ls -la
+      - run: ls -la
+      - run: ls -la ./_site
+      - run: touch ./_site/.nojekyll
 
   deploy:
     runs-on: ubuntu-latest
