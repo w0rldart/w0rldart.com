@@ -24,7 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - run: touch ./_site/.nojekyll
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
