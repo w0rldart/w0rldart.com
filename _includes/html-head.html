@@ -1,23 +1,35 @@
-{% assign title = 'Cloud and DevOps specialist in Zurich' %}
-{% assign description = 'Zurich based multi-cloud specialist: AWS, Google, Azure and Alibaba. Cloud development, Software Engineering and DevOps solutions.' %}
-
 {% if page.title %}
-    {% assign title = page.title %}
+    {% assign title = page.title | strip_html %}
+{% else %}
+    {% assign title = site.title %}
 {% endif %}
 
-{% if page.relative_path contains '_posts/' %}
-    {% if page.description and page.description != '' %}
-        {% assign description = page.description %}
-    {% elsif page.description and page.description == '' %}
-        {% assign description = page.excerpt | strip_html | strip_newlines %}
-    {% endif %}
+{% if page.excerpt %}
+    {% assign description = page.excerpt | strip_html | strip_newlines %}
+{% else %}
+    {% assign description = site.description %}
 {% endif %}
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{{ title }}</title>
-    <meta name="description" content="{{ description }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="{{ title }}" />
+    <meta name="twitter:title" content="{{ title }}">
+    
+    <meta name="description" content="{{ description }}" />
+    <meta property="og:description" content="{{ description }}" />
+    <meta property="twitter:description" content="{{ description }}" />
+
+    <!-- Tags -->
+    {% if page.tags %}
+    <meta name="keywords" content="{{ page.tags  | array_to_sentence_string }}">
+    {% endif %}
 
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab">
     <link rel="stylesheet" type="text/css" href="{{ '/assets/site.css' | relative_url }}">
