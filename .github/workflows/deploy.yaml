@@ -16,20 +16,9 @@ jobs:
           ruby-version: 2.5
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - run: bundle exec jekyll build
-      - run: ls -la
       - run: ls -la ./_site
       - run: touch ./_site/.nojekyll
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
-
-# deploy:
-#   provider: pages
-#   skip-cleanup: true
-#   keep-history: true
-#   on:
-#     branch: master
-#   github-token: $GITHUB_TOKEN
-#   local-dir: _site
-#   committer-from-gh: true
