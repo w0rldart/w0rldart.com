@@ -3,6 +3,9 @@ url: https://w0rldart.com
 permalink: /:title
 highlighter: rouge
 
+title: 'Cloud and DevOps specialist'
+description: 'Multi-cloud specialist: AWS, Google, Azure and Alibaba. Cloud development, Software Engineering and DevOps solutions.'
+
 plugins:
     - jekyll-archives
     - jekyll-coffeescript
