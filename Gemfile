@@ -7,3 +7,5 @@ gem 'jekyll-coffeescript'
 gem 'jekyll-sitemap'
 gem 'jekyll-redirect-from'
 gem 'jekyll-archives'
+
+gem "webrick", "~> 1.8"

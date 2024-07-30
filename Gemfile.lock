@@ -263,6 +263,7 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.8.0)
     uri (0.13.0)
+    webrick (1.8.1)
 
 PLATFORMS
   ruby
@@ -274,6 +275,7 @@ DEPENDENCIES
   jekyll-coffeescript
   jekyll-redirect-from
   jekyll-sitemap
+  webrick (~> 1.8)
 
 BUNDLED WITH
    2.4.19
