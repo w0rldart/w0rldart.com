@@ -8,12 +8,8 @@ description: 'Multi-cloud specialist: AWS, Google, Azure and Alibaba. Cloud deve
 
 plugins:
     - jekyll-archives
-    - jekyll-coffeescript
     - jekyll-redirect-from
     - jekyll-sitemap
-
-whitelist:
-  - jekyll-redirect-from
 
 sass:
     style: compressed

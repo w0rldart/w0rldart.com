@@ -2,14 +2,11 @@
 Personal website built with [Jekyll](https://jekyllrb.com/) and proxied via [Cloudflare](https://www.cloudflare.com/)
 
 # Requirements
-* [Ruby](https://www.ruby-lang.org/en/) and [Bundler](https://bundler.io/) which can be installed manually or via [rbenv](https://github.com/rbenv/rbenv#using-package-managers) with `rben install # for latest Ruby version` and `gem install bundler`
-* Gem dependencies from `Gemfile` via `bundler install`
+* Ruby 4.0+ and [Bundler](https://bundler.io/)
+* Install dependencies: `bundle install`
 
 # Usage
- - `jekyll build`
- - `jekyll serve`
+* `bundle exec jekyll build`
+* `bundle exec jekyll serve`
 
-or the following if you did not reload your shell, after installing all the bundles
-
- - `bundle exec jekyll build`
- - `bundle exec jekyll serve`
+The site is built with Jekyll 4 and deployed via GitHub Actions to the `gh-pages` branch.

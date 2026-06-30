@@ -1,11 +1,15 @@
 # frozen_string_literal: true
+
 source "https://rubygems.org"
 
-gem 'jekyll'
-gem 'github-pages'
-gem 'jekyll-coffeescript'
-gem 'jekyll-sitemap'
-gem 'jekyll-redirect-from'
-gem 'jekyll-archives'
+ruby ">= 4.0"
+
+gem "jekyll", "~> 4.4"
+
+group :jekyll_plugins do
+  gem "jekyll-archives"
+  gem "jekyll-redirect-from"
+  gem "jekyll-sitemap"
+end
 
 gem "webrick", "~> 1.8"
