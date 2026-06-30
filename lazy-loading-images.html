@@ -89,9 +89,9 @@
     <section class="content">
         <p>Lazy loading images upon DOM ready with the help of jQuery:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">img.to-load</span><span class="dl">'</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">,</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">));</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nf">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">img.to-load</span><span class="dl">'</span><span class="p">).</span><span class="nf">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nf">attr</span><span class="p">(</span><span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">,</span> <span class="nf">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nf">data</span><span class="p">(</span><span class="dl">'</span><span class="s1">src</span><span class="dl">'</span><span class="p">));</span>
     <span class="p">});</span>
 <span class="p">});</span></code></pre></figure>
 
